@@ -16,3 +16,12 @@ let score = new Number(100);
 console.log(typeof score);
 // no need to create number with 'new' keyword, javascript will do that for us
 console.log(score.toExponential());
+
+// ****   TASKS  *****
+
+let fiveZeroDigit = 1e5;
+console.log(fiveZeroDigit);
+console.log(typeof fiveZeroDigit);
+
+let floatNum = 3.1415;
+console.log(typeof floatNum);
