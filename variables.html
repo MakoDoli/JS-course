@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>JS basics</title>
+  </head>
+  <body>
+    <button><a href="./numbers.html" target="_blank">NUMBERS</a></button>
+    <button><a href="./strings.html" target="_blank">STRINGS</a></button>
+    <button><a href="./strings.html" target="_blank">VARIABLES</a></button>
+    <p>
+      global var is overwritten in blocks if redeclared with same name, while
+      global let is not overwritten inside of block if redeclared with same name
+    </p>
+    <p>
+      if let variable is declared inside block with "let" keyword, it is
+      block-scoped and not accessible outside of block
+    </p>
+    <p>
+      we can reasign global let variables inside block by using it without "let"
+      keyword, just by variable name
+    </p>
+    <h2>
+      Scope essentially means where these variables are available for use.
+    </h2>
+    <p>
+      var declarations are globally scoped or function scoped while let and
+      const are block scoped. <br />
+      var variables can be updated and re-declared within its scope; <br />
+      let variables can be updated but not re-declared; <br />const variables
+      can neither be updated nor re-declared. <br />They are all hoisted to the
+      top of their scope.<br />
+      But while var variables are initialized with undefined, let and const
+      variables are not initialized.<br />
+      While var and let can be declared without being initialized, const must be
+      initialized during declaration.
+    </p>
+    <p>
+      var attaches new property (var name) to window object (not sure how and
+      why), let doesnt
+    </p>
+    <script src="variables.js"></script>
+  </body>
+</html>
