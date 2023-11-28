@@ -1,3 +1,9 @@
+const globalVar = "Global var for other modules";
+
+const sayHi = () => {
+  console.log("I said hi");
+};
+
 //    VAR
 
 var greeter = "global hello";
