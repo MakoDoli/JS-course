@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <title>JS basics</title>
+    
   </head>
   <body>
     <button><a href="./numbers.html" target="_blank">NUMBERS</a></button>
     <button><a href="./strings.html" target="_blank">STRINGS</a></button>
-    <button><a href="./strings.html" target="_blank">VARIABLES</a></button>
+    <button>
+      <a href="./variables.html" target="_blank">VARIABLES<br />&SCOPES</a>
+    </button>
     <p>
       global var is overwritten in blocks if redeclared with same name, while
       global let is not overwritten inside of block if redeclared with same name
@@ -28,9 +31,10 @@
     <p>
       var declarations are globally scoped or function scoped while let and
       const are block scoped. <br />
+      <hr>
       var variables can be updated and re-declared within its scope; <br />
       let variables can be updated but not re-declared; <br />const variables
-      can neither be updated nor re-declared. <br />They are all hoisted to the
+      can neither be updated nor re-declared. <hr><br />They are all hoisted to the
       top of their scope.<br />
       But while var variables are initialized with undefined, let and const
       variables are not initialized.<br />
@@ -41,6 +45,10 @@
       var attaches new property (var name) to window object (not sure how and
       why), let doesnt
     </p>
-    <script src="variables.js"></script>
+    <p> function scope is accessible from block inside function, but block scope is not accessible in function outside the block, <br> so js searches for variable in same or 1 step upward scope, but not downward/nested scope </p>
+    <p>Anything surrounded with curly braces {} has own block scope inside curly braces</p>
+    
+    <script  src="variables.js" ></script>
+    <script type="module"  src="scopes.js"></script>
   </body>
 </html>

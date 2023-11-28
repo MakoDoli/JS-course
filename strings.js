@@ -1,6 +1,7 @@
 //  String primitive
-
-const message = "This is my first message ";
+// delete keyword "export" for this file to work
+export const message = "This is my first message ";
+console.log("NO IDEA WHY THIS IS LOGGED!!!");
 message[0]; // 'T'
 message[2]; // 'i'
 message.includes("my"); // true
