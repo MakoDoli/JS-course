@@ -29,6 +29,36 @@
       UNDEFINED means Variable has been declared but value is not ASSIGNED but
       NOT DEFINED means Variables is NOT DECLARED.
     </p>
+    <ul style="width: 70%">
+      <li>
+        Before starting to run even the first line of code, JavaScript first
+        creates global execution memory allocations for each variable in the
+        entire code file (var, let, const), which are set to "undefined" at this
+        point. Functions declared with the keyword "function" are fully created.
+        That's why we can access functions anytime from anywhere, no matter
+        where or when they are created in the global scope. Functions created
+        with the variable keyword are treated as variables, so they are also
+        undefined.
+      </li>
+      <li>
+        Then, JavaScript begins to read and execute the code line by line: it
+        assigns values to already initialized variables or executes functions.
+        When it encounters a function, JS puts this function in the call stack
+        and starts to execute it. If there is another nested function inside
+        this function, JS puts this new nested function on top of the parent
+        function in the call stack.
+      </li>
+      <li>
+        Unlike global execution, JS does not read the entire function before
+        executing it. Instead, JS reads the function line by line. If it
+        encounters a variable inside the block, JS looks for this variable
+        within the block scope in the code lines before this line. If it cannot
+        find it there, it looks upwards in the parent block but only in the part
+        that was read at the time of putting this new function in the call
+        stack. If it still cannot find it in the parent function, it goes out to
+        the global scope and looks for the variable there.
+      </li>
+    </ul>
     <script src="hoisting.js"></script>
   </body>
 </html>
