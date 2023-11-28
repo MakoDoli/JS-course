@@ -29,7 +29,7 @@ function log() {
   //let value = 1;
 }
 
-//let value = 1;
+let value = 1;
 logValue();
 //log();
 //let value = 1;
