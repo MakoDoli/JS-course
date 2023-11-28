@@ -14,6 +14,7 @@ var greeter = "another global hello";
 console.log(greeter);
 
 //var is hoisted
+// var is function-scoped
 // check this one in console with and without 'var' inside function
 var color = "yellow";
 function start() {
@@ -26,6 +27,7 @@ function start() {
 }
 start();
 console.log(color);
+//var creates window.property
 console.log("window's brand new property is " + window.color);
 //    LET
 
