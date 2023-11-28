@@ -2,8 +2,8 @@ console.log(" Here SCOPES start ".padStart(35, "*").padEnd(50, "*"));
 // GLOBAL SCOPE
 // accessible from everywhere
 // MODULAR SCOPE
-import { message } from "./strings.js";
-console.log(message);
+// import { message } from "./strings.js";
+// console.log(message);
 sayHi();
 console.log(globalVar); //imports from other modules global scope
 // but if we redeclare - check
@@ -39,6 +39,7 @@ function justFunction() {
     const y = 14;
     console.log("same const: block inside function: " + y); // 14
     console.log(funcy);
+    //const funcy = 25;
   }
   //console.log(blocky);
   console.log("same const: inside function: " + y); // 13
