@@ -77,8 +77,26 @@ console.log(autumn);
 piglets.splice(2);
 console.log(piglets);
 
+const duplicates = [1, 1, 2, 2, 3];
+console.log(new Set(duplicates));
+
 // some() returns true if at least one item meets condition, ro false if none
 // every() returns true if all elements meet the condition
 // filter() returns all elements which meet condition
 // forEach() does NOT return new array and it modifies original array
 // reduce (acc, item) returns result of calculation
+
+// -----------------------//
+//     while  loop,   do...while  loop
+
+let i = 3;
+
+while (i > 0) {
+  console.log(i);
+  i--;
+}
+i = 3;
+do {
+  console.log(i);
+  i--;
+} while (i > 3); // loop will executeat least once, because first it DOES,and then checks condition after
