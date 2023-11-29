@@ -23,7 +23,7 @@ if (y > 1) {
 
 //   LOCAL   SCOPE :
 // block scope
-//we can redeclare let and const inside block
+//we can declare let and const with same names as already declared ones, inside block. but this does not redeclare previous global let and const, these are new, block-scoped let & const
 
 {
   const y = 5;
