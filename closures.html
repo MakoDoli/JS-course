@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>JS basics</title>
+  </head>
+  <body>
+    <button><a href="./numbers.html" target="_blank">NUMBERS</a></button>
+    <button><a href="./strings.html" target="_blank">STRINGS</a></button>
+    <button>
+      <a href="./variables.html" target="_blank">VARIABLES<br />&SCOPES</a>
+    </button>
+    <button>
+      <a href="./hoisting.html" target="_blank">HOISTING</a>
+    </button>
+    <button>
+      <a href="./closures.html" target="_blank">CLOSURES</a>
+    </button>
+    <p>
+      when we have a function defined inside of other function, inner function
+      has access to the variables and scopes of the outer function, even if
+      outer function finishes executing and those variables are no longer
+      accessible outside of that function.
+    </p>
+    <p>
+      In JavaScript, closures are created every time a function is created, at
+      function creation time. <br />
+      A closure is the combination of a function and the lexical environment
+      within which that function was declared
+    </p>
+    <p>
+      Javascript interpreter creates "closure" where variables and data of outer
+      function are kept in 'heap memory', which lives longer than stack memory.
+      Inner function has access to variables kept in heap memory
+    </p>
+    <script src="closures.js"></script>
+  </body>
+</html>
