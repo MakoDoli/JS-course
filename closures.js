@@ -153,3 +153,15 @@ class MyObject {
 }
 const toString = new MyObject(1234, 5678);
 console.log(toString.getName());
+
+//lexical enviroment in closure
+//  !IMPORTANT
+function x() {
+  let a = 5;
+  function y() {
+    console.log(a);
+  }
+  a = 40; //will log updated a, NOT 5
+  return y;
+}
+x()();
