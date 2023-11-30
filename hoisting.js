@@ -45,3 +45,10 @@ test(greet);
 
 if (true) var checked = "checked"; //can not declare let or const. let and const must be decalred inside the block {}
 console.log(checked);
+
+// SHADOWING
+var varAgain = "first var";
+{
+  var varAgain = "second var"; // this var overwrites any previous var with same name
+}
+console.log(varAgain);
