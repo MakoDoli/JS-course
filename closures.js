@@ -156,12 +156,31 @@ console.log(toString.getName());
 
 //lexical enviroment in closure
 //  !IMPORTANT
+x(); //();
 function x() {
   let a = 5;
   function y() {
     console.log(a);
   }
+  y();
   a = 40; //will log updated a, NOT 5
+  y();
   return y;
 }
 x()();
+
+let last;
+console.log(last);
+
+function withTimeOut() {
+  //just use let instead of var, wtf
+  for (var i = 1; i <= 5; i++) {
+    function forClosure(i) {
+      setTimeout(function () {
+        console.log(i);
+      }, 1000);
+    }
+    forClosure(i);
+  }
+}
+withTimeOut();
