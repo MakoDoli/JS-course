@@ -33,5 +33,15 @@ let value = 1;
 logValue();
 //log();
 //let value = 1;
-// JS ფუნქციის შიგნით რა ხდება არ კითხულობს სანამ არ გამოვიძახებთ. ფუნქციის შიგნით უკვე თანმიმდევრობით მიყვება, წინასწარ არ კითხულობს მთელ ფუნქციას(unlike global execution). ფუნქციის შიგნით თავის ბლოკში თუ ვერ იპოვა, ამოდის ზემოთ ფუნქციის სკოუპში, იქაც თუ ვერ იპოვა, გამოდის გლობალ სკოუპში და იქაც თუ ვერ იპოვა ერორს აგდებს. (მანამდე სხვა ფუნქციაში რომც წაეკითხა, ამ ფუნქციიდან სხვაში ვერ წვდება, გლობალ სკოუპში ჩრდება)👏
+
 console.log("DONE!");
+
+let greet = "hello";
+function test(a) {
+  console.log(a);
+}
+test(greet);
+//let greet = "hello";
+
+if (true) var checked = "checked"; //can not declare let or const. let and const must be decalred inside the block {}
+console.log(checked);
