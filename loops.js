@@ -99,4 +99,16 @@ i = 3;
 do {
   console.log(i);
   i--;
-} while (i > 3); // loop will executeat least once, because first it DOES,and then checks condition after
+  console.log(i);
+} while (i > 3); // loop will execute at least once, because first it DOES,and then checks condition after
+
+for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 3; i++) {
+    let j = 3;
+    do {
+      console.log(j);
+      j--;
+      console.log(j);
+    } while (j > 3);
+  }
+}

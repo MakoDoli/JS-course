@@ -184,3 +184,9 @@ function withTimeOut() {
   }
 }
 withTimeOut();
+let j = 1;
+while (true) {
+  console.log(j);
+  j += 2;
+  if (j > 10) break;
+}
