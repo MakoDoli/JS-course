@@ -54,3 +54,43 @@ function myFunction() {
   // code here CAN use carName
 }
 // code here can NOT use carName
+
+function farm(animalColor) {
+  const color = animalColor;
+
+  if (color === "pink") {
+    var pig = true;
+  }
+  return function checkAnimal() {
+    if (pig) {
+      console.log(pig + "! We have pigs ");
+    } else {
+      console.log("whatever, anyway its true");
+    }
+  };
+}
+const isPig = farm("pink");
+isPig();
+// true! We have pigs
+
+let colorOfAnimal;
+
+function farm2() {
+  if (colorOfAnimal === "pink") {
+    var pig = true;
+  }
+
+  return function checkAnimal() {
+    colorOfAnimal = "pink";
+    if (pig) {
+      console.log(pig + "! Now we kinda have pigs");
+    } else {
+      console.log(pig + "! No pigs in the farm");
+    }
+  };
+}
+const whosdis = farm2()();
+//undefined! No pigs in the farm
+
+farm2()();
+//true! Now we kinda have pigs
