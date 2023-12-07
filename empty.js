@@ -18,3 +18,28 @@ var foo = iCantThinkOfAName(2, referenceObject); // closure #1
 
 foo(2); // num 4
 foo(4); // num 8
+
+//console.log(a);
+//console.log(b);
+function someFunc() {
+  if (true) {
+    a = 34;
+  }
+}
+someFunc();
+console.log(a);
+a = 75;
+const b = 75;
+
+//console.log(c);
+// let c = 7;
+// console.log("😀".split("")[0] + "😂".split("")[1]);
+// console.log("🍕".split("")[0] + "😂".split("")[1]);
+
+if (3 === 3) {
+  function printsmth() {
+    console.log("no idea");
+  }
+}
+
+printsmth();

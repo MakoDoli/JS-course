@@ -1,3 +1,4 @@
+"use strict";
 // LOOPS need:
 // START, DO on each, STOP
 // initialization, condition, finalExpression
@@ -80,6 +81,28 @@ console.log(piglets);
 const duplicates = [1, 1, 2, 2, 3];
 console.log(new Set(duplicates));
 
+//     Continue
+
+for (let j = 0; j < 4; j++) {
+  if (j === 2) {
+    continue; //skips
+  } else {
+    console.log(j);
+  }
+}
+for (let j = 0; j < 4; j++) {
+  if (j === 2) {
+    break; //stops fully
+  } else {
+    console.log(j);
+  }
+}
+
+const links = document.getElementsByTagName("a");
+console.log(links);
+for (let j = 0; j < links.length; j++) {
+  links[j].className = "link-" + j;
+}
 // some() returns true if at least one item meets condition, ro false if none
 // every() returns true if all elements meet the condition
 // filter() returns all elements which meet condition
@@ -88,6 +111,7 @@ console.log(new Set(duplicates));
 
 // -----------------------//
 //     while  loop,   do...while  loop
+console.log("While loops".padEnd(30, " ").padStart(60, " "));
 
 let i = 3;
 
@@ -95,6 +119,13 @@ while (i > 0) {
   console.log(i);
   i--;
 }
+
+i = 4;
+while (i > 3 && i < 6) {
+  console.log("double " + i);
+  i++;
+}
+
 i = 3;
 do {
   console.log(i);
