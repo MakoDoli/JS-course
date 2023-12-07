@@ -190,3 +190,32 @@ while (true) {
   j += 2;
   if (j > 10) break;
 }
+
+//   closure arrya of functions
+
+function buildFun(n) {
+  var res = [];
+
+  // for (var i = 0; i< n; i++){
+  //     (function(number){
+  //         res.push(function(){
+
+  //             return number;
+  //         })
+  //     })(i)
+  // }
+  // return res
+
+  //enclose "return number" in another function, so it returns number from its own closure
+  function createFunction(index) {
+    return function () {
+      return index;
+    };
+  }
+
+  for (var i = 0; i < n; i++) {
+    res.push(createFunction(i));
+  }
+
+  return res;
+}
