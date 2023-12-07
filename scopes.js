@@ -61,14 +61,16 @@ function farm(animalColor) {
   if (color === "pink") {
     var pig = true;
   }
-  return function checkAnimal() {
+  function checkAnimal() {
     if (pig) {
       console.log(pig + "! We have pigs ");
     } else {
       console.log("whatever, anyway its true");
     }
-  };
+  }
+  return checkAnimal;
 }
+
 const isPig = farm("pink");
 isPig();
 // true! We have pigs
@@ -89,6 +91,7 @@ function farm2() {
     }
   };
 }
+
 const whosdis = farm2()();
 //undefined! No pigs in the farm
 
