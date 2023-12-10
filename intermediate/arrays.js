@@ -24,12 +24,14 @@ const newArr = ["piggy", 3, true, 7, false, "Lui"];
 //delete newArr[0];
 //console.log(newArr); //[empty, 3, true]
 
+// SPLICE MUTATES ORIGINAL ARRAY
+
 //removing element or group of elements
 // starting index, how many to remove
 newArr.splice(1, 2);
 console.log(newArr);
 
-// replaceelemnt or group of elemnts
+// replace element or group of elemnts
 newArr.splice(1, 2, "new here");
 console.log(newArr);
 
@@ -37,7 +39,7 @@ console.log(newArr);
 newArr.splice(2, 0, [3, 8]);
 console.log(newArr);
 
-// splice array returns new arrya
+// slice array returns NEW arrya
 const alphabet = ["a", "b", "c", "d", "e", "f"];
 const newAlphabet = alphabet.slice(3);
 console.log(newAlphabet); //['d', 'e', 'f']
@@ -73,3 +75,44 @@ const arr4 = [...arr3, ...arr1];
 const arr5 = [arr1, arr2, arr3];
 console.log(arr4);
 console.log(arr5);
+
+//nested arrays
+
+const pigs = ["pepa", "rabiko"];
+const chicks = ["mamalo", "dedalo", "varika"];
+const dogs = ["chipo", "philip"];
+const cats = ["kira", "catto"];
+const yard = [pigs, chicks, dogs, cats];
+const rooms = ["bedroom", "kitchen"];
+const outter = ["balcony", "attic", "cellar"];
+const house = [rooms, outter];
+const farm = [yard, house];
+
+console.log(yard[1][0]); //mamalo
+console.log(farm[0][0][0]); // pepa
+
+// NEW ARRAY METHODS
+
+// with() -replaces and returns NEW array, unlike array.splice() which modifies original array
+const people = ["me", "you", "she", "he"];
+const noShe = people.with(2, "they");
+console.log(people);
+console.log(noShe);
+
+//toSorted() - returns new array, unlike array.sort() which modifies original array
+
+const names = ["mikasa", "eren", "levi"];
+const alphNames = names.toSorted();
+console.log(alphNames);
+
+//toReversed() - returns NEW array, unlike array.reverse() which modifies original
+
+const numbers = [1, 2, 3, 4, 5, 6, 7];
+const descending = numbers.toReversed();
+console.log(descending);
+
+//toSPliced() - has three arguments and removes/replaces group of elements, same as splice but returns NEW array
+
+const arrayAgain = ["q", "w", "e", "r", "t", "y"];
+const letsSlice = arrayAgain.toSpliced(1, 3, 0);
+console.log(letsSlice); //['q', 0, 't', 'y']
