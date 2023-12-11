@@ -39,7 +39,7 @@ console.log(newArr);
 newArr.splice(2, 0, [3, 8]);
 console.log(newArr);
 
-// slice array returns NEW arrya
+// SLICE array returns NEW arrya
 const alphabet = ["a", "b", "c", "d", "e", "f"];
 const newAlphabet = alphabet.slice(3);
 console.log(newAlphabet); //['d', 'e', 'f']
@@ -116,3 +116,168 @@ console.log(descending);
 const arrayAgain = ["q", "w", "e", "r", "t", "y"];
 const letsSlice = arrayAgain.toSpliced(1, 3, 0);
 console.log(letsSlice); //['q', 0, 't', 'y']
+
+// ----------------------------------
+//              ARRAY METHODS
+// ----------------------------------
+
+//array.forEach()
+const food = ["apple", "pear", "cheese", "butter", "coffee", "cake", "pear"];
+
+food.forEach((elem) => console.log(elem));
+food.forEach((elem, index) => (food[index] = elem + "s"));
+console.log(food);
+
+//array.map() - returns new array
+const chocolates = food.map((elem) => "chocolate");
+console.log(chocolates);
+
+//array.filter - returns new array of all matching elements
+
+const fourKeys = food.filter((elem) => elem.length === 5);
+console.log(fourKeys);
+
+//array.find() - returns first matching element
+
+const found = food.find((elem) => elem.length === 5);
+console.log(found);
+//if nothing found, returns undefined
+
+//array.findIndex()- takes condition as arg, returns first element index
+
+const ind = food.findIndex((elem) => elem === "pears");
+console.log(ind); // 1
+const noInd = food.findIndex((elem) => elem === "milk"); // if no such element => -1
+console.log(noInd);
+
+// array.indexOf() - takes one value as arg, returns first found elem
+
+// it can have 2nd argument - index after* which it should search
+const againInd = food.indexOf("coffees");
+console.log(againInd);
+const noSuchInd = food.indexOf("apples", 3);
+console.log(noSuchInd); //-1, because no apples after 3rd position
+
+//array.lastIndexOf() - takes one value/argument and returns index of last such el
+
+const lastInd = food.lastIndexOf("pears");
+console.log(lastInd);
+
+// array.some() -returns true if at least one elem mathces condition, otherwise false
+
+const exists = food.some((elem) => elem === "pears");
+const doesNot = food.some((elem) => elem === "quince");
+console.log(exists);
+console.log(doesNot);
+
+//array.every() returns true if ALL elementsmatch the condition
+
+const allStrings = food.every((elem) => typeof elem === "string");
+console.log(allStrings); // true
+
+//array.inlcudes() - returns true if elem exists. takes 2nd arg to start checking from that position
+
+//array.toString() - returns string with commas
+
+//array.join() - returns string with coommas, but with ('') separator returns string withOUT commas
+
+const foodStr = food.join("");
+console.log(foodStr);
+
+//array.fill() - changes original array. replaces all elemnts with fill(arg). 2nd arg is index from where fill will start
+//array.fill()
+//array.fill('new elem' , startInd)
+//array.fill('new el', srartInd, endInd) last index not included
+
+// array.copyWithin(2) - copies all array from given index. does not exceed array.length.
+//array.copyWithin(2, 4) - 2nd arg is from which position it takes array copy
+food.copyWithin(1);
+console.log(food);
+food.copyWithin(3, 5);
+console.log(food);
+food.copyWithin(1, 5, 1);
+console.log(food);
+
+// array.sort()- changes original array. sorts by alphabet or ascending numbers by first digit
+
+const randomNums = [3, 11, 6, 2, 67, 4, 23];
+
+randomNums.sort((a, b) => a - b);
+console.log(randomNums);
+
+// ARRAY.from()
+const someSTR = "12345";
+// const numArray = Array.from(someSTR) - this array will contain numbers as strings
+
+const numArray = Array.from(someSTR, (elem) => Number(elem));
+console.log(numArray);
+
+// Array.isArray(arr) -returns true or false
+
+// Array.valueOf() - makes copy of array
+
+const products = food.valueOf();
+console.log(products);
+
+// array.entries() - array.keys()
+
+const foodEntries = Array.from(food.entries());
+console.log(foodEntries);
+
+for (let elem of food.entries()) {
+  console.log(elem);
+} // logs index-value pairs
+
+const foodKeys = Array.from(food.keys());
+console.log(foodKeys);
+for (let key of food.keys()) {
+  console.log(key);
+}
+console.log([...foodKeys]);
+
+const foodValues = Array.from(food.values());
+console.log(foodValues); // same as copy of array
+
+for (let value of food) {
+  console.log(value);
+}
+
+//    REDUCE()
+
+const againArr = [4, 67, 3, 54, 4];
+const initialValue = 0;
+const reducedSum = againArr.reduce(
+  (prevValue, nextValue) => prevValue + nextValue,
+  initialValue
+);
+console.log(reducedSum);
+
+function reducer(prevValue, nextValue) {
+  return prevValue * nextValue;
+}
+const reducedProduct = againArr.reduce(reducer, 1);
+console.log(reducedProduct);
+
+function diff(prev, next) {
+  return +(prev - next);
+}
+const reducedMinus = againArr.reduce(diff, 0);
+console.log(reducedMinus);
+// if no initial value is defined, first elem of array will be defaulted init value
+
+// reduceRight() - starts from last elem
+
+// array.flat() - flattens nested array and returns NEW array
+const nested = [2, 56, [23, 7, [12, 4]]];
+const flattened = nested.flat(3);
+console.log(flattened);
+
+//array.flatMap()
+
+const mappedFlat = nested.flatMap((item) => {});
+console.log(mappedFlat);
+const sentences = ["Hello world", "How are you?", "JavaScript is fun"];
+
+const words = sentences.flatMap((sentence) => sentence.split(" "));
+
+console.log(words);
