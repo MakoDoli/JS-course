@@ -318,19 +318,50 @@ const words = sentences.flatMap((sentence) => sentence.split(" "));
 console.log(words); // ['Hello', 'world', 'How', 'are', 'you?', 'JavaScript', 'is', 'fun']
 //   ******************************
 
-const nestedCopy = [...nested];
-console.log(nestedCopy[2][0]);
+const nestedArr = [2, 56, [23, 7, [12, 4]], { name: "pepa" }];
+const nestedCopy = [...nestedArr];
+console.log(nestedCopy[2][0]); // 23
 nestedCopy[2][0] = 9;
-console.log(nestedCopy[2][0]);
-console.log(nested[2][0]);
-console.log(nested[3].name);
+console.log(nestedCopy[2][0]); // 9
+console.log(nestedArr[2][0]); // 9
+console.log(nestedArr[3].name); // pepa
 nestedCopy[3].name = "rabiko";
-console.log(nested[3].name);
+console.log(nestedArr[3].name); // rabiko
 
 //      array deep copy   /////////
 const deepCopy = structuredClone(nested);
-console.log(deepCopy);
+console.log(deepCopy); // (4) [2, 56, Array(3), {…}]
 deepCopy[2][0] = "copied";
-console.log(deepCopy[2][0]);
-console.log(nestedCopy[2][0]);
-console.log(nested[2][0]);
+console.log(deepCopy[2][0]); // copied
+console.log(nestedCopy[2][0]); // 9
+console.log(nestedArr[2][0]); // 9
+
+const objInArr = [1, { name: "armin" }];
+
+const shallowCopy = [...objInArr];
+shallowCopy[0] = "changed";
+shallowCopy[1].name = "colosal";
+console.log(objInArr[0]); // 1
+console.log(shallowCopy[0]); // changed
+console.log(objInArr[1].name); // colosal
+
+//   PRACTICE
+
+function sumOfDifferences(arr) {
+  return arr.length > 1 ? Math.max(...arr) - Math.min(...arr) : 0;
+}
+
+console.log(sumOfDifferences(againArr));
+
+function min(arr, toReturn) {
+  return toReturn === "value"
+    ? Math.min(...arr)
+    : arr.indexOf(Math.min(...arr));
+}
+
+console.log(min(againArr, "value"));
+// comparing array elements to filter non-repeats
+function repeats(arr) {
+  return arr.filter((elem) => arr.indexOf(elem) === arr.lastIndexOf(elem));
+}
+console.log(repeats([16, 0, 11, 4, 8, 16, 0, 11]));
