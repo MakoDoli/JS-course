@@ -147,3 +147,114 @@ function sings({ vocal }) {
   console.log(`${vocals} can sing!`);
 }
 sings(band);
+
+//  ***********************  //
+
+//       OOP     OOP    OOP
+
+const circle = {
+  radius: 1,
+  location: {
+    x: 1,
+    y: 1,
+  },
+  draw: function () {
+    console.log("draw");
+  },
+};
+circle.draw(); // draw
+
+// create object - FACTORY Function
+
+function createObject(radius) {
+  return {
+    radius: radius,
+    draw: function () {
+      console.log("draw cirlce");
+    },
+  };
+}
+const circles = createObject(1);
+
+// create Object - CONSTRUCTOR function
+
+function Circle(radius) {
+  console.log("this: ", this);
+  this.radius = radius;
+  this.draw = function () {
+    console.log("draw");
+  };
+}
+//const otherCircle = Circle(2); // this:  Window {window: Window, self: Window, document: document, name: '', location: Location, …}
+
+const otherCircle = new Circle(2); // this:  Circle {}
+// 1) new empty object is created
+// 2) this -> points to this new object
+// 3) properties are asigned to object
+
+// FACTORY - return object
+// CONSTRUCTOR - 'this' and 'new' keywords
+
+// circles.contructor -  ƒ Object() { [native code] }
+//
+//otherCircle.contructor - ƒ Circle(radius) {
+//   console.log("this: ", this);
+//   this.radius = radius;
+//   this.draw = function () {
+//     console.log("draw");
+//   };
+// }
+
+let x = {};
+// let x = new Object()
+//Every object has .contructor property, which references to function that was used to create this object
+
+//   Functions IS Object too !!!!
+
+console.log(Circle.name); // "Circle"
+console.log(Circle.length); // 1 (amount of parameters)
+
+// function methods
+
+Circle.call({}, 1); // {}- for 'this, 1 for parameter 'radius'
+
+// Circle.constructor - ƒ Function() { [native code] } -  own Function constructor
+
+// creating FUNCTIONS with constructor
+
+const Circle1 = new Function(
+  "radius",
+  `
+this.radius = radius;
+  this.draw = function () {
+    console.log("draw");
+  };
+`
+);
+
+const circleFromFunction = new Circle1(2);
+console.log(circleFromFunction); // {radius: 2, draw: ƒ}
+
+let number = 10;
+
+function add(number) {
+  number++;
+}
+add(number);
+add(number);
+console.log(number); // 10
+
+let number2 = 10;
+function add2() {
+  number2++;
+}
+add2();
+add2();
+console.log(number2); // 12
+
+let objNum = { value: 10 };
+function add3(obj) {
+  obj.value++;
+}
+add3(objNum);
+console.log(objNum.value); // 11
