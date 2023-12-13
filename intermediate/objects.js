@@ -52,7 +52,8 @@ const bugs = {
 };
 console.log(`${bugs.spider} has ${bugs.legs} legs`);
 console.log(bugs.action().action());
-// creating constructors
+
+// creating CONSTRUCTOR functions
 function Zombie(name) {
   this.name = name;
   this.reanimated = Date.now();
@@ -120,14 +121,21 @@ console.log(myBassName); //John Paul Jones
 console.log(vocals); // Robert Plant
 
 for (let job in band) {
-  console.log(job);
+  // to exclude methods
+  if (typeof job !== "function") console.log(job);
   console.log(band[job]);
   console.log(`${band[job]} is on ${job}`);
 }
+
 // Robert Plant
 // Jimy Page
 // John Paul Jones
 // John Bonham
+
+// check if objects has property
+if ("bass" in band) {
+  console.log(`The band has bass`);
+}
 
 for (let job of Object.keys(band)) {
   console.log(job); // logs keys
@@ -176,21 +184,59 @@ function createObject(radius) {
 }
 const circles = createObject(1);
 
+//********************************** */
 // create Object - CONSTRUCTOR function
 
 function Circle(radius) {
   console.log("this: ", this);
+
   this.radius = radius;
+
+  //   this.computOptimumLocation = function () {
+  //     console.log("Dont call me!");
+  //   };
+  let computOptimumLocation = function () {
+    console.log("Cannot get me!");
+  };
   this.draw = function () {
+    computOptimumLocation();
     console.log("draw");
   };
+
+  //this.defaultLocation = { x: 0, y: 0 };
+  let defaultLocation = { x: 0, y: 0 };
+
+  this.getDefaultLocation = function () {
+    console.log(defaultLocation);
+    return defaultLocation;
+  };
+
+  Object.defineProperty(this, "defaultLocation", {
+    get: function () {
+      console.log(defaultLocation);
+      return defaultLocation;
+    },
+    set: function (value) {
+      if (!value.x || !value.y) throw new Error("Invalid location");
+      defaultLocation = value;
+    },
+  });
 }
+// getters are read-only
+
+// to hide details, we declare them as variables, not as object properties
+
 //const otherCircle = Circle(2); // this:  Window {window: Window, self: Window, document: document, name: '', location: Location, …}
 
 const otherCircle = new Circle(2); // this:  Circle {}
 // 1) new empty object is created
 // 2) this -> points to this new object
 // 3) properties are asigned to object
+
+otherCircle.draw(); // Cannot get me!
+otherCircle.getDefaultLocation();
+otherCircle.defaultLocation;
+//otherCircle.defaultLocation = 1; // error
 
 // FACTORY - return object
 // CONSTRUCTOR - 'this' and 'new' keywords
@@ -209,6 +255,7 @@ let x = {};
 // let x = new Object()
 //Every object has .contructor property, which references to function that was used to create this object
 
+//************************************* */
 //   Functions IS Object too !!!!
 
 console.log(Circle.name); // "Circle"
@@ -235,6 +282,7 @@ this.radius = radius;
 const circleFromFunction = new Circle1(2);
 console.log(circleFromFunction); // {radius: 2, draw: ƒ}
 
+//  primitves vs objects as arguments
 let number = 10;
 
 function add(number) {
@@ -258,3 +306,48 @@ function add3(obj) {
 }
 add3(objNum);
 console.log(objNum.value); // 11
+
+// adding and accessing properties
+
+const circle3 = new Circle(10);
+circle.location = { x: 3 };
+
+const propertyName = "center-location";
+circle[propertyName] = { x: 50 };
+console.log(circle["location"]);
+console.log(circle[propertyName]);
+
+//************************** */
+// STOPWATCH  EXERCISE
+
+function StopWatch() {
+  let startTimer;
+  this.duration = 0;
+
+  this.start = function () {
+    startTimer = setInterval(() => {
+      this.duration++;
+      console.log(this.duration);
+    }, 1000);
+  };
+
+  this.clear = function () {
+    clearInterval(startTimer);
+  };
+  this.stop = function () {
+    console.log(`Timer duration was ${this.duration}`);
+    this.clear();
+  };
+  this.reset = function () {
+    this.clear();
+    this.duration = 0;
+    this.start();
+  };
+}
+
+const sw = new StopWatch();
+console.log(sw);
+//sw.start();
+//sw.stop();
+
+//******************************* */
