@@ -137,3 +137,42 @@ const a2 = new dog("Jeff");
 
 a1.makeSound();
 a2.makeSound();
+
+//*********************** */
+//   Creating classes for DOM elements
+
+class ListBinding {
+  constructor(element) {
+    this.listElement = element;
+    this.textList = [];
+  }
+  // Makes <li>text</li> tag
+  static createListItem(text) {
+    const li = document.createElement("li");
+    li.textContent = text;
+    return li;
+  }
+
+  update() {
+    // REmove all existing <li> elements
+
+    while (this.listElement.firstChild) {
+      this.listElement.removeChild(this.listElement.firstChild);
+    }
+
+    //  Fill <ul> tag with <li> elements
+
+    for (const text of this.textList) {
+      this.listElement.appendChild(ListBinding.createListItem(text));
+    }
+  }
+
+  add(text) {
+    this.textList.push(text);
+    this.update();
+  }
+
+  remove(index) {
+    this.textList.splice(index, 1);
+  }
+}
