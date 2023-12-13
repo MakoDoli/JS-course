@@ -22,7 +22,7 @@ console.log(anotherObj.hobbies[2]); //code
 console.log(anotherObj["beverage"].morning); // coffee
 anotherObj.action();
 //  ***********************  //
-// CREATING OBJECTS and its properties and methods
+// CREATING OBJECT and its properties and methods
 
 const obj = Object.create({});
 Object.defineProperty(obj, "unicorn", {
@@ -65,6 +65,7 @@ function Zombie(name) {
 const cuteZombie = new Zombie("Greeney");
 
 console.log(cuteZombie.eatBrain());
+
 // Object inharitance
 
 const vehicle = {
@@ -132,7 +133,7 @@ for (let job in band) {
 // John Paul Jones
 // John Bonham
 
-// check if objects has property
+// check if object has property
 if ("bass" in band) {
   console.log(`The band has bass`);
 }
@@ -238,8 +239,8 @@ otherCircle.getDefaultLocation();
 otherCircle.defaultLocation;
 //otherCircle.defaultLocation = 1; // error
 
-// FACTORY - return object
-// CONSTRUCTOR - 'this' and 'new' keywords
+// FACTORY -lowercase, returns object
+// CONSTRUCTOR -Uppercase, 'this' and 'new' keywords
 
 // circles.contructor -  ƒ Object() { [native code] }
 //
