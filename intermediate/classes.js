@@ -176,3 +176,91 @@ class ListBinding {
     this.textList.splice(index, 1);
   }
 }
+
+//*********************** */
+//   Let's make   PIZZA!
+
+class Pizza {
+  constructor(pizzaType) {
+    this.type = pizzaType;
+    this._size = "medium";
+    this._crust = "original";
+    this.toppings = [];
+  }
+  //getCrust()
+  get pizzaCrust() {
+    return this._crust;
+  }
+
+  //setCrust(param)
+  set pizzaCrust(crustType) {
+    this.crust = crustType;
+  }
+
+  getToppings() {
+    return this.toppings;
+  }
+
+  setToppings(topping) {
+    this.toppings.push(topping);
+  }
+
+  bake() {
+    console.log(
+      `Baking a ${this.size} ${this.crust} crust ${
+        this.type
+      } pizza with ${this.toppings.join("")}`
+    );
+  }
+}
+
+const myPizza = new Pizza("Margherita");
+myPizza.bake();
+myPizza.pizzaCrust = "thin";
+//myPizza.setCrust('thin')
+myPizza.bake();
+myPizza.setToppings("sausage");
+myPizza.bake();
+
+class SpecialtPizza extends Pizza {
+  constructor(pizzaType) {
+    super(pizzaType);
+    this.type = "The works";
+  }
+  slice() {
+    console.log(`OUr ${this.type} ${this.size} pizza has 8 slices`);
+  }
+}
+
+const mySpecialty = new SpecialtPizza("medium");
+mySpecialty.slice();
+
+// Public and Private fields
+
+class Pizza2 {
+  crust = "Original"; // public
+  #sauce = "traditional"; // #private
+  #size;
+  constructor(pizzaSize) {
+    this.#size = pizzaSize;
+  }
+
+  getCrust() {
+    return this.crust;
+  }
+
+  setCrust(pizzaCrust) {
+    return (this.crust = pizzaCrust);
+  }
+
+  hereYouGo() {
+    console.log(
+      `Here's your ${this.crust} ${this.#sauce} sauce ${this.#size} pizza`
+    );
+  }
+}
+
+const pizzaWithSauce = new Pizza2("large");
+pizzaWithSauce.hereYouGo();
+console.log(pizzaWithSauce.crust); //Original
+console.log(pizzaWithSauce.sauce); //Undefined

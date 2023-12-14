@@ -185,6 +185,19 @@ function createObject(radius) {
 }
 const circles = createObject(1);
 
+function pizzaFactory(pizzaSize) {
+  const crust = "original";
+  const size = pizzaSize;
+  return {
+    //returns object
+    bake: () => {
+      console.log(`Baking a ${size} ${crust} pizza`);
+    },
+  };
+}
+
+const pizza = pizzaFactory("small");
+myPizza.bake();
 //********************************** */
 // create Object - CONSTRUCTOR function
 
