@@ -264,3 +264,128 @@ const pizzaWithSauce = new Pizza2("large");
 pizzaWithSauce.hereYouGo();
 console.log(pizzaWithSauce.crust); //Original
 console.log(pizzaWithSauce.sauce); //Undefined
+
+//*************************** */
+//      This   keyword
+
+// 'this' === current execution context
+
+//-------------------------------------
+// if function is part of object, "this" references to parent object
+// method -> object
+//if function is regular function, not part of object, it references to global object
+// function - global (window, global)
+
+// METHOD
+const video = {
+  title: "a",
+  tags: ["a", "b", "c"],
+  showTags() {
+    this.tags.forEach(
+      function (tag) {
+        console.log(tag, this);
+        // here 'this'reference to global (window) object because callback functions inside of method is not part of object. its inner function of method, so its regular function
+      },
+      this
+      //{ firstName: "Mosh" } // now if we add object as 2nd argument in forEach(), 'this' inside of forEach method will reference to this object
+    );
+  },
+  play() {
+    console.log(this);
+  },
+};
+
+video.play();
+video.showTags();
+
+// REGULAR FUNCTION
+
+function playVideo() {
+  console.log(this);
+}
+playVideo(); // only without 'strict mode'
+
+function Video(title) {
+  this.title = title;
+  console.log(this);
+}
+
+const v = new Video("aot");
+//if you call constructor function with 'new' keyword, it will create and reference to empty object
+
+function whodis() {
+  console.log(this); // window
+}
+
+const jeff = {
+  face: ":O",
+  whodis,
+};
+jeff.whodis(); // 'this' is jeff object
+
+const itsJeff = whodis.bind(jeff);
+itsJeff(); // 'this' is jeff object
+
+// 'this' in methods declared with 'function' keyword referenc to parent object.
+// 'this in methods declared by arrow fucntion references to global obj enclosing the parent object (one step up environment)
+
+// DO NOT use arrow functions in methods using 'this'
+
+const joe = {
+  face: ":O",
+
+  whodis: function () {
+    console.log(this); // joe object
+  },
+
+  whome: () => console.log(this), // arrow functions reference to global
+
+  showFace,
+};
+console.log(joe.showFace());
+
+//*********************** */
+
+//       bind, call and apply
+
+//when we can not put our FUNCTION IN OBJECT (no access to object), we can put OBJECT IN OUR FUNCTION
+
+function showFace() {
+  return this.face;
+}
+
+// 1) to "pass" object as parameter, so "this" refers to argument's object, we use .bind
+
+const showJoesFace = showFace.bind(joe);
+console.log(showJoesFace);
+
+console.log(showJoesFace());
+
+// or can use .call
+
+//showFace.call(joe, arg1, arg2);
+
+// 2) or can use .apply. args in array
+
+showFace.call(joe, ["other", "arguments", "here"]);
+// !!!!!!!!!!!!!!!!!!!!!!!!!
+// .bind just modifies function, while .call executes function
+
+// 'this' inside contructor functions
+
+function Person2(n) {
+  this.name = n;
+  this.talk = function () {
+    console.log(this);
+  };
+
+  this.wait = setTimeout(
+    function () {
+      console.log(this);
+    }.bind(this),
+    300
+  );
+  // wait() will be called because setTImout is called as soon as its created. 'this' inside function inside of parent function points to global, so we need to .bind inner function to parent object
+}
+const lelouch = new Person2("lelouch");
+lelouch.talk();
