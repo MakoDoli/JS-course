@@ -294,7 +294,8 @@ const video = {
     console.log(this);
   },
 };
-
+video.length = 60;
+console.log(video);
 video.play();
 video.showTags();
 
@@ -389,4 +390,3 @@ function Person2(n) {
 }
 const lelouch = new Person2("lelouch");
 lelouch.talk();
-git;
