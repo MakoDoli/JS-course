@@ -197,7 +197,7 @@ function pizzaFactory(pizzaSize) {
 }
 
 const pizza = pizzaFactory("small");
-myPizza.bake();
+pizza.bake();
 //********************************** */
 // create Object - CONSTRUCTOR function
 
@@ -365,3 +365,58 @@ console.log(sw);
 //sw.stop();
 
 //******************************* */
+//   CHECK  FROM HERE !!!!!!!!!!!!!!!!
+
+// this f***ing keyword
+
+//when function is method in object: this -> object
+
+var firstName = "Ilia"; // !!!!!!!!!!!!
+const ilia = {
+  firstName: "Ilia",
+  year: 1837,
+
+  // KEY:    VALUE,
+  calcAge: function () {
+    console.log(2024 - this.year);
+  }, // FUNCTION IS JUST VALUE!!!!
+
+  greet: () => console.log(`Don't shoot, I am ${this.firstName}`), // this -> window object
+
+  withArrow: function () {
+    const inner = () =>
+      console.log(`${this.firstName} was born in ${this.year}`);
+    // this -> one step up, grandParent function
+    inner();
+  },
+
+  withFunction: function () {
+    const self = this; // to access this
+    const inner = function () {
+      console.log(`${self.firstName} establisehd first bank`);
+    };
+    inner();
+  },
+};
+ilia.greet();
+
+ilia.calcAge(); // 187 - ilia's age
+
+ilia.withArrow(); // Ilia was born in 1837
+ilia.withFunction();
+
+const akaki = {
+  firstName: "Akaki",
+  year: 1840,
+};
+
+// using object's function as simple function to assign to other object's method
+
+akaki.calcAge = ilia.calcAge;
+akaki.calcAge(); // 184 - akaki's age
+akaki.withArrow = ilia.withArrow;
+akaki.withArrow(); // Akaki was born in 1840
+
+//using as regular, simple function
+//    const justFunc = ilia.calcAge;
+//    justFunc();
