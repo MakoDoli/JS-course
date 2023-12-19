@@ -345,6 +345,8 @@ console.log(objInArr[0]); // 1
 console.log(shallowCopy[0]); // changed
 console.log(objInArr[1].name); // colosal
 
+// 88888888888888888888888888888888
+
 //   PRACTICE
 
 function sumOfDifferences(arr) {
@@ -365,3 +367,40 @@ function repeats(arr) {
   return arr.filter((elem) => arr.indexOf(elem) === arr.lastIndexOf(elem));
 }
 console.log(repeats([16, 0, 11, 4, 8, 16, 0, 11]));
+
+// map()
+// adding function to ARRAY PROTOTYPE
+const radius = [3, 2, 5, 1];
+const area = function (r) {
+  return Math.PI * r * r;
+};
+
+const calcAreas = radius.map(area);
+console.log(calcAreas);
+
+const calculateArea = function (arr, logic) {
+  const output = [];
+  for (let i = 0; i < arr.length; i++) {
+    output.push(logic(radius[i]));
+  }
+  return output;
+};
+console.log(calculateArea(radius, area));
+
+Array.prototype.calculate = function (logic) {
+  const output = [];
+  for (let i = 0; i < this.length; i++) {
+    output.push(logic(this[i]));
+  }
+  return output;
+};
+radius.calculate(area);
+
+// map() again
+const toBeDoubled = [5, 2, 7, 11];
+
+function double(n) {
+  return n * 2;
+}
+const doubled = toBeDoubled.map(double);
+console.log(doubled);
