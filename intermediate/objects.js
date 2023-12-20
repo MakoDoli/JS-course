@@ -54,6 +54,7 @@ console.log(`${bugs.spider} has ${bugs.legs} legs`);
 console.log(bugs.action().action());
 
 // creating CONSTRUCTOR functions
+
 function Zombie(name) {
   this.name = name;
   this.reanimated = Date.now();
@@ -66,6 +67,23 @@ const cuteZombie = new Zombie("Greeney");
 
 console.log(cuteZombie.eatBrain());
 
+// another   CONSTRUCTOR FUNCTION
+
+function SuperElement(type, content) {
+  this.el = document.createElement(type);
+  this.el.innerText = content;
+  document.body.append(this.el);
+  this.el.addEventListener("click", () => {
+    console.log(this.el);
+  });
+}
+
+const h1 = new SuperElement("h1", "hello again");
+
+const elArray = ["a", "b", "c"];
+
+const myElements = elArray.map((item) => new SuperElement("p", item));
+
 // Object inharitance
 
 const vehicle = {
@@ -76,7 +94,7 @@ const vehicle = {
 };
 
 //  ***********************  //
-//     INHERITANCE
+//     INHERITANCE - PROTOTYPE
 
 const truck = Object.create(vehicle);
 truck.doors = 2;
@@ -251,6 +269,15 @@ otherCircle.draw(); // Cannot get me!
 otherCircle.getDefaultLocation();
 otherCircle.defaultLocation;
 //otherCircle.defaultLocation = 1; // error
+Circle.prototype.color = "red";
+console.log(otherCircle.color); // red
+console.log("radius" in otherCircle); //true
+console.log("color" in otherCircle); //true
+console.log(otherCircle.hasOwnProperty("radius")); //true
+console.log(otherCircle.hasOwnProperty("color")); //false
+
+console.log(otherCircle.__proto__ === Circle.prototype); // TRUE!!!!
+//******************************* */
 
 // FACTORY -lowercase, returns object
 // CONSTRUCTOR -Uppercase, 'this' and 'new' keywords
@@ -420,3 +447,41 @@ akaki.withArrow(); // Akaki was born in 1840
 //using as regular, simple function
 //    const justFunc = ilia.calcAge;
 //    justFunc();
+
+const lastObj = {
+  a: 7,
+  get b() {
+    this.a = 8;
+    return this.a;
+  },
+
+  set c(param) {
+    this.a = this.a + param;
+  },
+};
+console.log(lastObj.a);
+console.log(lastObj.b);
+console.log(lastObj.a);
+lastObj.c = 5;
+console.log(lastObj.a);
+
+//////////////////////////////////
+//        PRACTICE
+
+const Moto = function (model, speed) {
+  this.model = model;
+  this.speed = speed;
+};
+
+Moto.prototype.accelerate = function () {
+  this.speed += 20;
+};
+Moto.prototype.brake = function () {
+  this.speed -= 20;
+};
+const harley = new Moto("Harley Davidson", 300);
+harley.accelerate();
+console.log(harley.speed);
+
+//const davidson = new harley("bike", 200);
+// harley is NOT CONTRUCTOR

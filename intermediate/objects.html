@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../style.css" />
-    <title>JS basics</title>
+    <title>JS OBJECTS</title>
   </head>
   <body>
     <button><a href="./basics/numbers.html" target="_blank">NUMBERS</a></button>
@@ -45,6 +45,19 @@
     <p>
       Every object has .contructor property, which references to function that
       was used to create this object
+    </p>
+    <hr />
+    <p>
+      Factory functions are simple functions which take parameters and create
+      and return objects using parameters as object key values
+    </p>
+    <p>
+      Contructor function should be written with capital Letter, it creates pack
+      of properties and methods of future object. The object is actually created
+      by keyword 'new' which creates empty object inside the contructor
+      function, assignes this empty object to 'this' variable, drops bunch of
+      properties and methods in object and returns newly baked object. all that
+      behind scenes
     </p>
     <script src="objects.js"></script>
   </body>
