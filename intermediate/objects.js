@@ -271,7 +271,12 @@ otherCircle.defaultLocation;
 //otherCircle.defaultLocation = 1; // error
 Circle.prototype.color = "red";
 console.log(otherCircle.color); // red
+console.log("radius" in otherCircle); //true
+console.log("color" in otherCircle); //true
+console.log(otherCircle.hasOwnProperty("radius")); //true
+console.log(otherCircle.hasOwnProperty("color")); //false
 
+console.log(otherCircle.__proto__ === Circle.prototype); // TRUE!!!!
 //******************************* */
 
 // FACTORY -lowercase, returns object
@@ -459,3 +464,24 @@ console.log(lastObj.b);
 console.log(lastObj.a);
 lastObj.c = 5;
 console.log(lastObj.a);
+
+//////////////////////////////////
+//        PRACTICE
+
+const Moto = function (model, speed) {
+  this.model = model;
+  this.speed = speed;
+};
+
+Moto.prototype.accelerate = function () {
+  this.speed += 20;
+};
+Moto.prototype.brake = function () {
+  this.speed -= 20;
+};
+const harley = new Moto("Harley Davidson", 300);
+harley.accelerate();
+console.log(harley.speed);
+
+//const davidson = new harley("bike", 200);
+// harley is NOT CONTRUCTOR

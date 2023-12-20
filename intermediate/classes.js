@@ -390,3 +390,35 @@ function Person2(n) {
 }
 const lelouch = new Person2("lelouch");
 lelouch.talk();
+
+class Sweet {
+  constructor(sweetsName, weight) {
+    this.name = sweetsName;
+    this.weight = weight;
+  }
+
+  get nameOfSweet() {
+    return this.name;
+  }
+  getNameOfSweet() {
+    return this.name;
+  }
+
+  addWeight() {
+    return (this.weight += 200);
+  }
+}
+
+const candy = new Sweet("candy", 300);
+console.log(candy.nameOfSweet);
+candy.addWeight();
+console.log(candy.weight);
+candy.addWeight = function () {
+  return (this.weight += 500);
+};
+candy.addWeight();
+console.log(candy.weight);
+candy.getNameOfSweet = function () {
+  return "changed";
+};
+console.log(candy.getNameOfSweet());

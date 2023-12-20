@@ -202,6 +202,22 @@ const addTaxFunc = function (rate) {
 const addTaxArr = (rate) => (value) => value + value * rate * 0.01;
 
 const addTax2 = addTaxFunc(18);
+console.dir(addTax2);
 console.log(addTax2(200));
 const addTax3 = addTaxArr(18);
 console.log(addTax3(200));
+
+// closures again
+
+let f = "not function";
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+g();
+f();
+
+console.dir(g);
+console.log(g.prototype.constructor);
