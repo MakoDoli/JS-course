@@ -471,6 +471,7 @@ console.log(lastObj.a);
 const Moto = function (model, speed) {
   this.model = model;
   this.speed = speed;
+  this.year = 2010;
 };
 
 Moto.prototype.accelerate = function () {
@@ -485,3 +486,45 @@ console.log(harley.speed);
 
 //const davidson = new harley("bike", 200);
 // harley is NOT CONTRUCTOR
+
+const Bike = function (model, speed, color) {
+  Moto.call(this, model, speed);
+  this.color = color;
+  this.year = 2015;
+};
+Bike.prototype.engine = function () {
+  console.log(`${this.color} ${this.model} engine: bghn bghn`);
+};
+
+const kawasaki = new Bike("Kawasaki", 400, "green");
+kawasaki.engine();
+//kawasaki.accelerate(); error, kawasaki proto is Bike, not Moto
+//harley.engine(); error, harley's proto is Moto
+console.log(kawasaki.year);
+console.log(kawasaki instanceof Bike); //true
+Object.setPrototypeOf(Bike, Moto);
+console.log(kawasaki instanceof Moto); // false
+console.log(kawasaki.year);
+//console.log(kawasaki.accelerate()); error
+//Bike.prototype = Object.create(Moto.prototype);
+console.log(kawasaki instanceof Moto);
+//console.log(kawasaki.accelerate()); error
+console.log(kawasaki.year);
+
+const Polygon = function () {
+  this.name = "Polygon";
+};
+
+const Rectangle = function () {
+  this.name = "Rectangle";
+};
+
+const Square = function () {
+  Polygon.call(this);
+};
+
+Object.setPrototypeOf(Square.prototype, Rectangle.prototype);
+
+const newInstance = new Square();
+
+console.log(newInstance.name); // Polygon

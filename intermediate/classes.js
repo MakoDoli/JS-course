@@ -391,6 +391,9 @@ function Person2(n) {
 const lelouch = new Person2("lelouch");
 lelouch.talk();
 
+////////////////////////////////////////
+//          PRACTICE
+
 class Sweet {
   constructor(sweetsName, weight) {
     this.name = sweetsName;
@@ -422,3 +425,46 @@ candy.getNameOfSweet = function () {
   return "changed";
 };
 console.log(candy.getNameOfSweet());
+
+class Titan {
+  constructor(name, type) {
+    this.name = name;
+    this.type = type;
+  }
+
+  get titanType() {
+    return this.type;
+  }
+
+  set titanType(titanName) {
+    if (this.name === "Attacking") this.type = "Founding";
+  }
+}
+
+const eren = new Titan("Attacking", "dumb");
+console.log(eren.titanType); //dumb
+eren.titanType = "Attacking";
+console.log(eren.titanType); // Founding
+
+class Polygon {
+  constructor() {
+    this.name = "Polygon";
+  }
+}
+
+class Rectangle2 {
+  constructor() {
+    this.name = "Rectangle";
+  }
+}
+class Square extends Polygon {
+  #area = 5;
+  constructor() {
+    super();
+  }
+}
+Object.setPrototypeOf(Square, Rectangle2);
+
+const newInstance = new Square();
+console.log(newInstance.name); // Rectangle
+console.log(newInstance);

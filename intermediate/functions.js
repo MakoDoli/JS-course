@@ -213,7 +213,8 @@ let f = "not function";
 const g = function () {
   const a = 23;
   f = function () {
-    console.log(a * 2);
+    const b = 2;
+    console.log(a * b);
   };
 };
 g();
