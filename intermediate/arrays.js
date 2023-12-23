@@ -426,3 +426,14 @@ alteredArr.filter();
 const filtered2 = alteredArr.filter((item) => item < 2);
 console.log(filtered2);
 console.dir(alteredArr);
+
+// forEAch()
+
+const product = function (n) {
+  return n * 2;
+};
+const dumbArr = [4, 5, 2];
+console.log(dumbArr.forEach(product));
+console.log(dumbArr.map(product));
+dumbArr.forEach((elem, index, arr) => (arr[index] = product(elem)));
+console.log(dumbArr);

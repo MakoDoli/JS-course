@@ -91,9 +91,9 @@ function attachEventListeners() {
 }
 attachEventListeners.call(button);
 attachEventListeners.call(secondButton);
-function clickHandler(e) {
-  e.target.textContent = "already clicked";
-}
+// function clickHandler(e) {
+//   e.target.textContent = "already clicked";
+// }
 
 //********************************* */
 
@@ -119,7 +119,7 @@ const transformer = function (str, fn) {
 transformer("Javascript is the best!", upperFirstWord);
 transformer("Javascript is the best!", oneWord);
 
-const high5 = function (str) {
+const high5 = function (str = "there") {
   console.log(`🖐 hi ${str.length ? str : "there"} `);
 };
 document.body.addEventListener("click", high5);
