@@ -528,3 +528,14 @@ Object.setPrototypeOf(Square.prototype, Rectangle.prototype);
 const newInstance = new Square();
 
 console.log(newInstance.name); // Polygon
+
+// __proto__ vs prototype
+
+let cat = { breed: "munchkin", name: "gato" };
+
+let myCat = { name: "fluffy" };
+
+Object.setPrototypeOf(myCat, cat);
+console.log(myCat.breed);
+console.log(myCat.name);
+console.log(myCat.__proto__); //{breed: 'munchkin', name: 'gato'} - cat
