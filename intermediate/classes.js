@@ -391,6 +391,37 @@ function Person2(n) {
 const lelouch = new Person2("lelouch");
 lelouch.talk();
 
+// *****************************/
+//        ABSTRACT  METHOD
+// is an emoty, or plain method, which needs to be implemented in subclass/instance
+
+class Dog {
+  constructor(name) {
+    this.name = name;
+  }
+  makeSound() {
+    console.log("This dog is muted until  implementing this feature");
+  }
+}
+
+class SmallDog extends Dog {
+  constructor(name) {
+    super();
+  }
+
+  makeSound() {
+    console.log("auu");
+  }
+}
+
+const chipo = new SmallDog("chipo");
+chipo.makeSound(); // auu
+const jerry = new Dog("jerry");
+jerry.makeSound(); // muted
+
+////////////////////////////////////////
+//          PRACTICE
+
 class Sweet {
   constructor(sweetsName, weight) {
     this.name = sweetsName;
@@ -422,3 +453,75 @@ candy.getNameOfSweet = function () {
   return "changed";
 };
 console.log(candy.getNameOfSweet());
+
+class Titan {
+  constructor(name, type) {
+    this.name = name;
+    this.type = type;
+  }
+
+  get titanType() {
+    return this.type;
+  }
+
+  set titanType(titanName) {
+    if (this.name === "Attacking") this.type = "Founding";
+  }
+}
+
+const eren = new Titan("Attacking", "dumb");
+console.log(eren.titanType); //dumb
+eren.titanType = "Attacking";
+console.log(eren.titanType); // Founding
+
+class Polygon {
+  constructor() {
+    this.name = "Polygon";
+  }
+}
+
+class Rectangle2 {
+  constructor() {
+    this.name = "Rectangle";
+  }
+}
+class Square extends Polygon {
+  #area = 5;
+  constructor() {
+    super();
+  }
+}
+Object.setPrototypeOf(Square, Rectangle2);
+
+const newInstance = new Square();
+console.log(newInstance.name); // Rectangle
+console.log(newInstance);
+
+class BankAccount {
+  #accStatement = [];
+  #balance = 0;
+  constructor() {}
+
+  deposit(value) {
+    this.#balance += value;
+    this.#accStatement.push(value);
+  }
+
+  withdraw(value) {
+    this.#balance -= value;
+    this.#accStatement.push(-value);
+  }
+
+  get statement() {
+    return this.#accStatement.join(" ");
+  }
+  get balance() {
+    return this.#balance;
+  }
+}
+
+const musk = new BankAccount();
+musk.deposit(30);
+musk.withdraw(10);
+console.log(musk.balance);
+console.log(musk.statement);
