@@ -528,3 +528,42 @@ Object.setPrototypeOf(Square.prototype, Rectangle.prototype);
 const newInstance = new Square();
 
 console.log(newInstance.name); // Polygon
+
+// __proto__ vs prototype
+
+let cat = { breed: "munchkin", name: "gato" };
+
+let myCat = { name: "fluffy" };
+
+Object.setPrototypeOf(myCat, cat);
+console.log(myCat.breed);
+console.log(myCat.name);
+console.log(myCat.__proto__); //{breed: 'munchkin', name: 'gato'} - cat
+
+const myObject = {
+  city: "Madrid",
+  greet() {
+    console.log(`Greetings from ${this.city}`);
+  },
+};
+
+myObject.greet();
+console.dir(myObject.greet.prototype); //undefined
+
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// all REGULAR FUNCTIONS have prototype
+
+// METHODS DO NOTTTT have prototype
+
+const randomFunc = function () {
+  console.log("I dont have prototype");
+};
+randomFunc.prototype.sayHi = function () {
+  console.log("sayHi");
+};
+console.log(randomFunc.prototype);
+
+const randomFuncBaby = new randomFunc();
+console.log(randomFuncBaby);
+console.log(randomFuncBaby.__proto__);
+randomFuncBaby.sayHi();
