@@ -339,79 +339,90 @@ document.body.click(); // WHY ON EARTH
 
 //------------------------------
 
-const imgStr = "https://picsum.photos/seed/picsum/200/300";
-const txtStr = "http://127.0.01:5500";
+// const imgStr = "https://picsum.photos/seed/picsum/200/300";
+// const txtStr = "http://127.0.01:5500";
 
-// HTTP Request --- HEAD, BODY
-// HTTP Response ---HEAD, BODY
-let obj = {
-  id: crypto.randomUUID(),
-  name: "The one who knocks on heaven door",
-  favColor: "blue",
-};
+// // HTTP Request --- HEAD, BODY
+// // HTTP Response ---HEAD, BODY
+// let obj = {
+//   id: crypto.randomUUID(),
+//   name: "The one who knocks on heaven door",
+//   favColor: "blue",
+// };
+
+// function getData() {
+//   fetch("https://jsonplaceholder.typicode.com/users")
+//     .then((res) => {
+//       return res.json();
+//     })
+//     .then((dataArray) => {
+//       console.log(dataArray);
+//       const section = document.getElementsByTagName("section")[0];
+//       section.innerHTML = dataArray
+//         .splice(0, 5)
+//         .map(({ id, name }) => {
+//           return `<li data-uid=${id}></li>
+//             <p>${name}`;
+//         })
+//         .join();
+//     });
+
+//   fetch(txtStr)
+//     .then((txt) => {
+//       if (!txt.ok) throw new Error("no text");
+
+//       return txt.text();
+//     })
+//     .then((txt) => {
+//       console.log(txt);
+//     })
+//     .catch(console.warn);
+
+//   // get image from url
+//   fetch(imgStr)
+//     .then((res) => {
+//       if (!res.ok) throw new Error("no such img");
+//       return res.blob(); //binary large object-media
+//       //res.text(); //text, html
+//       //res.json(); //json files
+//       //res.blobl(); // images, video, audio, fonts
+//     })
+//     .then((blob) => {
+//       console.log(blob);
+//       let srcURL = URL.createObjectURL(blob);
+//       let img = document.getElementById("random-img");
+//       img.src = srcURL;
+//       console.log(srcURL);
+//     })
+//     .catch(console.warn);
+
+//   let jsonString = JSON.stringify(obj);
+//   console.log(jsonString);
+//   let file = new File([jsonString], "mydata.json", {
+//     type: "application/json",
+//   });
+
+//   let response = new Response(file, {
+//     status: 200,
+//     statusText: "Say smth",
+//     headers: {
+//       "content-type": "application/json",
+//       "content-length": file.size,
+//       "x-steve": "starts with x for custom header name",
+//     },
+//   });
+//   console.log(response);
+//   console.log(response.headers.get("x-steve"));
+// }
+// getData();
+
+//******************************* */
+//     API  KEYS
+
+//we pass/send API keys to server - in querystring, headers, cookies
 
 function getData() {
-  fetch("https://jsonplaceholder.typicode.com/users")
-    .then((res) => {
-      return res.json();
-    })
-    .then((dataArray) => {
-      console.log(dataArray);
-      const section = document.getElementsByTagName("section")[0];
-      section.innerHTML = dataArray
-        .splice(0, 5)
-        .map(({ id, name }) => {
-          return `<li data-uid=${id}></li>
-            <p>${name}`;
-        })
-        .join();
-    });
+  let str = "https://jsonplaceholder.typicode.com/users";
 
-  fetch(txtStr)
-    .then((txt) => {
-      if (!txt.ok) throw new Error("no text");
-
-      return txt.text();
-    })
-    .then((txt) => {
-      console.log(txt);
-    })
-    .catch(console.warn);
-
-  // get image from url
-  fetch(imgStr)
-    .then((res) => {
-      if (!res.ok) throw new Error("no such img");
-      return res.blob(); //binary large object-media
-      //res.text(); //text, html
-      //res.json(); //json files
-      //res.blobl(); // images, video, audio, fonts
-    })
-    .then((blob) => {
-      console.log(blob);
-      let srcURL = URL.createObjectURL(blob);
-      let img = document.getElementById("random-img");
-      img.src = srcURL;
-      console.log(srcURL);
-    })
-    .catch(console.warn);
-
-  let jsonString = JSON.stringify(obj);
-  console.log(jsonString);
-  let file = new File([jsonString], "mydata.json", {
-    type: "application/json",
-  });
-
-  let response = new Response(file, {
-    status: 200,
-    statusText: "Say smth",
-    headers: {
-      "content-type": "application/json",
-      "content-length": file.size,
-      "x-steve": "starts with x for custom header name",
-    },
-  });
-  console.log(response);
-  console.log(response.headers.get("x-steve"));
+  fetch(request);
 }
-getData();
