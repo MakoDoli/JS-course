@@ -29,11 +29,13 @@
 // });
 // console.log("13 stack");
 
-document.body.addEventListener("click", () => {
+document.body.addEventListener("click", (e) => {
+  if (e.target.tagName === "BUTTON" || "INPUT") return;
   Promise.resolve().then(() => console.log("mikrotask from click 1"));
   console.log("stack task from click 1");
 });
-document.body.addEventListener("click", () => {
+document.body.addEventListener("click", (e) => {
+  if (e.target.tagName === "BUTTON" || "INPUT") return;
   Promise.resolve().then(() => console.log("mikrotask from click 2-------"));
   console.log("stack task from click 2");
 });
@@ -421,8 +423,249 @@ document.body.click(); // WHY ON EARTH
 
 //we pass/send API keys to server - in querystring, headers, cookies
 
-function getData() {
-  let str = "https://jsonplaceholder.typicode.com/users";
+// function getData() {
+//   let str = "http://127.0.0.1:3000/?name=value&steve=griffith";
+//   let url = new URL(str);
+//   let sp = url.searchParams;
+//   sp.append("hello", "world");
+//   sp.append("api-key", "dfdfd-57dfnsdf-4");
 
-  fetch(request);
+//   let h = new Headers();
+//   h.append("x-api-key", "dfdfd-57dfnsdf-4"); // API key
+//   h.append("Authorization", "Bearer dfdfd-57dfnsdf-4"); // JWT-json web token
+
+//   let request = new Request(url, {
+//     method: "POST",
+//     headers: h,
+//     cache: "default",
+//     credentials: "omit",
+//   });
+//   fetch(request)
+//     .then((res) => {
+//       if (!res.ok) throw new Error("smth not right");
+//       return res.text().then((data) => {
+//         console.log(data);
+//       });
+//     })
+//     .catch(console.err);
+// }
+
+// getData();
+
+//********************************** */
+//    fetch   POST   UPLOAD
+
+//     CHECK THIS!!!!!!!!!!!!!!!
+
+let endpoint = "http://127.0.0.1:3000";
+
+function setData() {
+  const imgInput = document.getElementById("imgfile");
+  const jsonInput = document.getElementById("jsonfile");
+  //console.log(document.forms.myform); -another way to access form
+  document.getElementById("myform").addEventListener("submit", (ev) => {
+    ev.preventDefault();
+    //upload smth
+
+    let obj = {
+      id: 123,
+      name: "someNick",
+    };
+    let jsonToString = JSON.stringify(obj);
+    let fd = new FormData(document.getElementById("myform"));
+    //   ------------- for image -----------
+    // fd.append("imgfile", imgInput.files[0], imgInput.files[0].name);
+    // console.log(imgInput.value);
+    // console.log(imgInput.files[0]);
+
+    let request = new Request(endpoint, {
+      method: "POST",
+      //body: jsonToString,
+      body: fd,
+      headers: {
+        // "content-type": "application/json",
+        "content-type": "multipart/form-data",
+      },
+    });
+
+    fetch(request)
+      .then((res) => {
+        if (!res.ok) throw new Error("smth aain not irght");
+        return res.text();
+      })
+      .then((txt) => {
+        console.log(txt);
+      });
+  });
 }
+setData();
+
+//********************************* */
+//    Multiple Requests
+
+//handle multiple requests for data
+// in sequence .then().then().then()
+// or at the same time - Promise.all() .race() .allSettled()
+
+const jsonstr = "https://random-data-api.com/api/v2/users?size=10";
+const imgstr = "https://picsum.photos/id/237/300/200";
+
+function getData() {
+  let imgResponse;
+  let jsonResopnse;
+  fetch(imgstr)
+    .then((res) => {
+      if (!res.ok) throw new Error("smth wrong");
+      imgResponse = res.blob();
+      return fetch(jsonstr);
+    })
+    .then((res) => {
+      if (!res.ok) throw new Error("smth wrong");
+      jsonResopnse = res.json();
+      return Promise.all([imgResponse, jsonResopnse]);
+    })
+    .then(([blob, dataObj]) => {
+      console.log(dataObj);
+      console.log(blob);
+    })
+    .catch(console.warn);
+
+  Promise.all([fetch(imgstr), fetch(jsonstr)])
+    .then(([imgRes, jsonRes]) => {
+      return Promise.all([imgRes.blob(), jsonRes.json()]);
+    })
+    .then(([blob, jsonData]) => {
+      console.log(blob, jsonData);
+    })
+    .catch();
+}
+getData();
+
+//********************************* */
+//   Abort  fetch
+
+const urlToStop = "https://picsum.photos/id/237/3000/2000";
+const controller = new AbortController();
+const signal = controller.signal;
+
+function getData2() {
+  let abortBtn = document.getElementById("stop-btn");
+  abortBtn.addEventListener("click", () => {
+    controller.abort();
+    console.log("aborted");
+  });
+
+  let request = new Request(urlToStop, {
+    method: "GET",
+    signal: signal,
+  });
+  fetch(request)
+    .then((res) => {
+      if (!res.ok) throw new Error("smth wrong");
+      return res.blob();
+    })
+    .then((blob) => {
+      console.log(blob.size);
+    })
+    .catch(console.warn);
+}
+getData2();
+
+//*************************************** */
+//      ERROR  HANDLING
+
+try {
+  console.log("start of try runs");
+  unicycle;
+  console.log("End of try runs is never reached");
+} catch (err) {
+  console.log(" Error has occured at: " + err.stack + err.message);
+} finally {
+  console.log("This always runs");
+}
+console.log(".. Then the execution continues");
+
+let json = '{"age" : 30}';
+
+try {
+  let user = JSON.parse(json);
+  if (!user.name) throw new SyntaxError("Incomplete data: no name");
+  console.log(user.name);
+} catch (err) {
+  console.log(err.name + ": " + err.message);
+}
+
+/*A try block requires either a catch block, a finally block, or both.
+ Note that, when a finally block contains a return statement, that value becomes the return value for the whole function; other return statements in try or catch blocks are ignored. */
+
+// err.name  = type of error
+
+// Reference error - variable not found
+// TypeError - unexpected type, f.e. non-existing method
+// SyntaxError - wrong syntax, typo
+// RangeError - values is not in range of valid values
+// URIError - malformed url
+// EvalError -passing a string containing invalid JavaScript code to the eval() function:
+// AggregateError - several errors, f.e. when Promise.all()
+//InternalError - javascript engine error, Firefox only
+// Error - general error
+
+function showResult() {
+  try {
+    result.value = divide(
+      parseFloat(num1.value),
+      parseFloat(num2.value),
+      parseFloat(dp.value)
+    );
+  } catch (e) {
+    result.value = "FAIL!";
+  }
+}
+function divide(v1, v2, dp) {
+  try {
+    return (v1 / v2).toFixed(dp);
+  } catch (e) {
+    throw new Error("ERROR", { cause: e });
+    //passing to calling function the "cause"
+  }
+}
+//     throw
+// throw "A simple error string";
+// throw 42;
+// throw true;
+// throw { message: "An error", name: "MyError" };
+
+//---------------------------
+// create CUSTOM ERROR
+
+let v2 = "3";
+class DivByZeroError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "DivByZeroError";
+  }
+}
+if (isNaN(v2) || !v2) {
+  throw new DivByZeroError("Divisor must be a non-zero number");
+}
+
+function wait(delay = 2000) {
+  return new Promise((resolve, reject) => {
+    if (isNaN(delay) || delay < 0) {
+      reject(new RangeError("invalid delay"));
+    }
+    // setTimeout(() => {
+    //   resolve(console.log(`waited ${delay / 1000} seconds`));
+    // }, delay);
+    resolve(console.log(`waited ${delay / 1000} seconds`));
+  });
+}
+//wait();
+wait("invalid")
+  .then((res) => {
+    return res.text();
+  })
+  .then((text) => {
+    console.log(text);
+  })
+  .catch(console.warn);
