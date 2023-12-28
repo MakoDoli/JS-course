@@ -42,6 +42,26 @@
     <hr />
     <img id="random-img" />
     <section></section>
+    <form name="myform" id="myform" action="https://www.google.ca/">
+      <p>
+        <label for="jsonfile">JSON:</label>
+        <input
+          type="file"
+          id="jsonfile"
+          name="jsonfile"
+          accept="application/json"
+        />
+      </p>
+      <p>
+        <label for="imgfile">Image:</label>
+        <input type="file" id="imgfile" name="imgfile" accept="image/*" />
+      </p>
+      <p>
+        <button id="btnSend">Send</button>
+      </p>
+    </form>
+    <button id="stop-btn">stop fetching</button>
     <script src="async.js"></script>
+    <script type="module" src="user.js"></script>
   </body>
 </html>
