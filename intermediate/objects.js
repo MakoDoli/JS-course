@@ -535,6 +535,7 @@ let cat = { breed: "munchkin", name: "gato" };
 
 let myCat = { name: "fluffy" };
 
+console.log(cat.prototype);
 Object.setPrototypeOf(myCat, cat);
 console.log(myCat.breed);
 console.log(myCat.name);
@@ -558,6 +559,7 @@ console.dir(myObject.greet.prototype); //undefined
 const randomFunc = function () {
   console.log("I dont have prototype");
 };
+console.log(randomFunc.prototype);
 randomFunc.prototype.sayHi = function () {
   console.log("sayHi");
 };

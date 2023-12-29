@@ -669,3 +669,5 @@ wait("invalid")
     console.log(text);
   })
   .catch(console.warn);
+
+eval("console.logg x;");
