@@ -1,3 +1,7 @@
+"use strict";
+
+const { create } = require("json-server");
+
 // console.log("1 stack");
 // queueMicrotask(function () {
 //   console.log("2 microtask");
@@ -457,48 +461,48 @@ document.body.click(); // WHY ON EARTH
 
 //     CHECK THIS!!!!!!!!!!!!!!!
 
-let endpoint = "http://127.0.0.1:3000";
+// let endpoint = "http://127.0.0.1:3000";
 
-function setData() {
-  const imgInput = document.getElementById("imgfile");
-  const jsonInput = document.getElementById("jsonfile");
-  //console.log(document.forms.myform); -another way to access form
-  document.getElementById("myform").addEventListener("submit", (ev) => {
-    ev.preventDefault();
-    //upload smth
+// function setData() {
+//   const imgInput = document.getElementById("imgfile");
+//   const jsonInput = document.getElementById("jsonfile");
+//   //console.log(document.forms.myform); -another way to access form
+//   document.getElementById("myform").addEventListener("submit", (ev) => {
+//     ev.preventDefault();
+//     //upload smth
 
-    let obj = {
-      id: 123,
-      name: "someNick",
-    };
-    let jsonToString = JSON.stringify(obj);
-    let fd = new FormData(document.getElementById("myform"));
-    //   ------------- for image -----------
-    // fd.append("imgfile", imgInput.files[0], imgInput.files[0].name);
-    // console.log(imgInput.value);
-    // console.log(imgInput.files[0]);
+//     let obj = {
+//       id: 123,
+//       name: "someNick",
+//     };
+//     let jsonToString = JSON.stringify(obj);
+//     let fd = new FormData(document.getElementById("myform"));
+//     //   ------------- for image -----------
+//     // fd.append("imgfile", imgInput.files[0], imgInput.files[0].name);
+//     // console.log(imgInput.value);
+//     // console.log(imgInput.files[0]);
 
-    let request = new Request(endpoint, {
-      method: "POST",
-      //body: jsonToString,
-      body: fd,
-      headers: {
-        // "content-type": "application/json",
-        "content-type": "multipart/form-data",
-      },
-    });
+//     let request = new Request(endpoint, {
+//       method: "POST",
+//       //body: jsonToString,
+//       body: fd,
+//       headers: {
+//         // "content-type": "application/json",
+//         "content-type": "multipart/form-data",
+//       },
+//     });
 
-    fetch(request)
-      .then((res) => {
-        if (!res.ok) throw new Error("smth aain not irght");
-        return res.text();
-      })
-      .then((txt) => {
-        console.log(txt);
-      });
-  });
-}
-setData();
+//     fetch(request)
+//       .then((res) => {
+//         if (!res.ok) throw new Error("smth aain not irght");
+//         return res.text();
+//       })
+//       .then((txt) => {
+//         console.log(txt);
+//       });
+//   });
+// }
+// setData();
 
 //********************************* */
 //    Multiple Requests
@@ -507,93 +511,93 @@ setData();
 // in sequence .then().then().then()
 // or at the same time - Promise.all() .race() .allSettled()
 
-const jsonstr = "https://random-data-api.com/api/v2/users?size=10";
-const imgstr = "https://picsum.photos/id/237/300/200";
+// const jsonstr = "https://random-data-api.com/api/v2/users?size=10";
+// const imgstr = "https://picsum.photos/id/237/300/200";
 
-function getData() {
-  let imgResponse;
-  let jsonResopnse;
-  fetch(imgstr)
-    .then((res) => {
-      if (!res.ok) throw new Error("smth wrong");
-      imgResponse = res.blob();
-      return fetch(jsonstr);
-    })
-    .then((res) => {
-      if (!res.ok) throw new Error("smth wrong");
-      jsonResopnse = res.json();
-      return Promise.all([imgResponse, jsonResopnse]);
-    })
-    .then(([blob, dataObj]) => {
-      console.log(dataObj);
-      console.log(blob);
-    })
-    .catch(console.warn);
+// function getData() {
+//   let imgResponse;
+//   let jsonResopnse;
+//   fetch(imgstr)
+//     .then((res) => {
+//       if (!res.ok) throw new Error("smth wrong");
+//       imgResponse = res.blob();
+//       return fetch(jsonstr);
+//     })
+//     .then((res) => {
+//       if (!res.ok) throw new Error("smth wrong");
+//       jsonResopnse = res.json();
+//       return Promise.all([imgResponse, jsonResopnse]);
+//     })
+//     .then(([blob, dataObj]) => {
+//       console.log(dataObj);
+//       console.log(blob);
+//     })
+//     .catch(console.warn);
 
-  Promise.all([fetch(imgstr), fetch(jsonstr)])
-    .then(([imgRes, jsonRes]) => {
-      return Promise.all([imgRes.blob(), jsonRes.json()]);
-    })
-    .then(([blob, jsonData]) => {
-      console.log(blob, jsonData);
-    })
-    .catch();
-}
-getData();
+//   Promise.all([fetch(imgstr), fetch(jsonstr)])
+//     .then(([imgRes, jsonRes]) => {
+//       return Promise.all([imgRes.blob(), jsonRes.json()]);
+//     })
+//     .then(([blob, jsonData]) => {
+//       console.log(blob, jsonData);
+//     })
+//     .catch();
+// }
+// getData();
 
 //********************************* */
 //   Abort  fetch
 
-const urlToStop = "https://picsum.photos/id/237/3000/2000";
-const controller = new AbortController();
-const signal = controller.signal;
+// const urlToStop = "https://picsum.photos/id/237/3000/2000";
+// const controller = new AbortController();
+// const signal = controller.signal;
 
-function getData2() {
-  let abortBtn = document.getElementById("stop-btn");
-  abortBtn.addEventListener("click", () => {
-    controller.abort();
-    console.log("aborted");
-  });
+// function getData2() {
+//   let abortBtn = document.getElementById("stop-btn");
+//   abortBtn.addEventListener("click", () => {
+//     controller.abort();
+//     console.log("aborted");
+//   });
 
-  let request = new Request(urlToStop, {
-    method: "GET",
-    signal: signal,
-  });
-  fetch(request)
-    .then((res) => {
-      if (!res.ok) throw new Error("smth wrong");
-      return res.blob();
-    })
-    .then((blob) => {
-      console.log(blob.size);
-    })
-    .catch(console.warn);
-}
-getData2();
+//   let request = new Request(urlToStop, {
+//     method: "GET",
+//     signal: signal,
+//   });
+//   fetch(request)
+//     .then((res) => {
+//       if (!res.ok) throw new Error("smth wrong");
+//       return res.blob();
+//     })
+//     .then((blob) => {
+//       console.log(blob.size);
+//     })
+//     .catch(console.warn);
+// }
+// getData2();
 
 //*************************************** */
 //      ERROR  HANDLING
 
-try {
-  console.log("start of try runs");
-  unicycle;
-  console.log("End of try runs is never reached");
-} catch (err) {
-  console.log(" Error has occured at: " + err.stack + err.message);
-} finally {
-  console.log("This always runs");
-}
-console.log(".. Then the execution continues");
+// try {
+//   console.log("start of try runs");
+//   unicycle;
+//   console.log("End of try runs is never reached");
+// } catch (err) {
+//   console.log(" Error has occured at: " + err.stack + err.message);
+// } finally {
+//   console.log("This always runs");
+// }
+// console.log(".. Then the execution continues");
 
-let json = '{"age" : 30}';
+// let json = '{"age" : 30}';
 
-try {
-  let user = JSON.parse(json);
-  if (!user.name) throw new SyntaxError("Incomplete data: no name");
-  console.log(user.name);
-} catch (err) {
-  console.log(err.name + ": " + err.message);
-}
+// try {
+//   let user = JSON.parse(json);
+//   if (!user.name) throw new SyntaxError("Incomplete data: no name");
+//   console.log(user.name);
+// } catch (err) {
+//   console.log(err.name + ": " + err.message);
+// }
 
 /*A try block requires either a catch block, a finally block, or both.
  Note that, when a finally block contains a return statement, that value becomes the return value for the whole function; other return statements in try or catch blocks are ignored. */
@@ -610,25 +614,25 @@ try {
 //InternalError - javascript engine error, Firefox only
 // Error - general error
 
-function showResult() {
-  try {
-    result.value = divide(
-      parseFloat(num1.value),
-      parseFloat(num2.value),
-      parseFloat(dp.value)
-    );
-  } catch (e) {
-    result.value = "FAIL!";
-  }
-}
-function divide(v1, v2, dp) {
-  try {
-    return (v1 / v2).toFixed(dp);
-  } catch (e) {
-    throw new Error("ERROR", { cause: e });
-    //passing to calling function the "cause"
-  }
-}
+// function showResult() {
+//   try {
+//     result.value = divide(
+//       parseFloat(num1.value),
+//       parseFloat(num2.value),
+//       parseFloat(dp.value)
+//     );
+//   } catch (e) {
+//     result.value = "FAIL!";
+//   }
+// }
+// function divide(v1, v2, dp) {
+//   try {
+//     return (v1 / v2).toFixed(dp);
+//   } catch (e) {
+//     throw new Error("ERROR", { cause: e });
+//     //passing to calling function the "cause"
+//   }
+// }
 //     throw
 // throw "A simple error string";
 // throw 42;
@@ -638,36 +642,90 @@ function divide(v1, v2, dp) {
 //---------------------------
 // create CUSTOM ERROR
 
-let v2 = "3";
-class DivByZeroError extends Error {
-  constructor(message) {
-    super(message);
-    this.name = "DivByZeroError";
+// let v2 = "3";
+// class DivByZeroError extends Error {
+//   constructor(message) {
+//     super(message);
+//     this.name = "DivByZeroError";
+//   }
+// }
+// if (isNaN(v2) || !v2) {
+//   throw new DivByZeroError("Divisor must be a non-zero number");
+// }
+
+// function wait(delay = 2000) {
+//   return new Promise((resolve, reject) => {
+//     if (isNaN(delay) || delay < 0) {
+//       reject(new RangeError("invalid delay"));
+//     }
+//     // setTimeout(() => {
+//     //   resolve(console.log(`waited ${delay / 1000} seconds`));
+//     // }, delay);
+//     resolve(console.log(`waited ${delay / 1000} seconds`));
+//   });
+// }
+// //wait();
+// wait("invalid")
+//   .then((res) => {
+//     return res.text();
+//   })
+//   .then((text) => {
+//     console.log(text);
+//   })
+//   .catch(console.warn);
+
+//eval("console.logg x;");
+
+//*************************** */
+//   fetch methods practice
+
+async function postData(e) {
+  try {
+    const post = await fetch("http://localhost:3000/people", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: "fred",
+        age: 22,
+      }),
+    });
+    console.log(post);
+  } catch (err) {
+    console.warn(err);
   }
 }
-if (isNaN(v2) || !v2) {
-  throw new DivByZeroError("Divisor must be a non-zero number");
+//postData();
+async function fetchData() {
+  const response = await fetch("http://localhost:3000/people");
+  const data = await response.json();
+  console.log(data);
 }
-
-function wait(delay = 2000) {
-  return new Promise((resolve, reject) => {
-    if (isNaN(delay) || delay < 0) {
-      reject(new RangeError("invalid delay"));
-    }
-    // setTimeout(() => {
-    //   resolve(console.log(`waited ${delay / 1000} seconds`));
-    // }, delay);
-    resolve(console.log(`waited ${delay / 1000} seconds`));
+fetchData();
+async function updateData() {
+  const response = await fetch("http://localhost:3000/people/2", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: "moli",
+      age: 22,
+    }),
   });
 }
-//wait();
-wait("invalid")
-  .then((res) => {
-    return res.text();
-  })
-  .then((text) => {
-    console.log(text);
-  })
-  .catch(console.warn);
+//updateData();
 
-eval("console.logg x;");
+async function deleteData() {
+  const response = await fetch("http://localhost:3000/people/13", {
+    method: "DELETE",
+  });
+}
+//deleteData();
+
+// CRUD
+// C- create - POST
+// R - Read - GET
+// U - update - PUT
+// D - delete - DELETE
