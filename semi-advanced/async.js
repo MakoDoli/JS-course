@@ -1,6 +1,6 @@
 "use strict";
 
-const { create } = require("json-server");
+//const { create } = require("json-server");
 
 // console.log("1 stack");
 // queueMicrotask(function () {
@@ -679,49 +679,49 @@ document.body.click(); // WHY ON EARTH
 //*************************** */
 //   fetch methods practice
 
-async function postData(e) {
-  try {
-    const post = await fetch("http://localhost:3000/people", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: "fred",
-        age: 22,
-      }),
-    });
-    console.log(post);
-  } catch (err) {
-    console.warn(err);
-  }
-}
-//postData();
-async function fetchData() {
-  const response = await fetch("http://localhost:3000/people");
-  const data = await response.json();
-  console.log(data);
-}
-fetchData();
-async function updateData() {
-  const response = await fetch("http://localhost:3000/people/2", {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name: "moli",
-      age: 22,
-    }),
-  });
-}
-//updateData();
+// async function postData(e) {
+//   try {
+//     const post = await fetch("http://localhost:3000/people", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         name: "fred",
+//         age: 22,
+//       }),
+//     });
+//     console.log(post);
+//   } catch (err) {
+//     console.warn(err);
+//   }
+// }
+// //postData();
+// async function fetchData() {
+//   const response = await fetch("http://localhost:3000/people");
+//   const data = await response.json();
+//   console.log(data);
+// }
+// fetchData();
+// async function updateData() {
+//   const response = await fetch("http://localhost:3000/people/2", {
+//     method: "PUT",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({
+//       name: "moli",
+//       age: 22,
+//     }),
+//   });
+// }
+// //updateData();
 
-async function deleteData() {
-  const response = await fetch("http://localhost:3000/people/13", {
-    method: "DELETE",
-  });
-}
+// async function deleteData() {
+//   const response = await fetch("http://localhost:3000/people/13", {
+//     method: "DELETE",
+//   });
+// }
 //deleteData();
 
 // CRUD
@@ -729,3 +729,5 @@ async function deleteData() {
 // R - Read - GET
 // U - update - PUT
 // D - delete - DELETE
+
+
