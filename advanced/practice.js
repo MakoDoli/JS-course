@@ -55,3 +55,10 @@ const fruits = { fruit: "peach" };
 localStorage.setItem("fruits", JSON.stringify(fruits));
 const getFruits = JSON.parse(localStorage.getItem("fruits"));
 console.log(getFruits);
+
+function store(name, obj) {
+  localStorage.setItem(name, JSON.stringify(obj));
+}
+function retrieve(name) {
+  return JSON.parse(localStorage.getItem(name));
+}
