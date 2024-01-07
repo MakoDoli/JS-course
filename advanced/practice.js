@@ -25,5 +25,33 @@ let js = new URL(location).searchParams.get("js");
 let css = new URL(location).searchParams.get("css");
 
 section.innerHTML = `<style>${css}</style>${html}`;
-
+function add() {
+  console.log("3");
+}
 eval(js);
+
+//********************************* */
+//   inspect element --> Application
+//           LOCALSTORAGE
+
+// key-value pair
+localStorage.setItem("name", "chipo");
+localStorage.setItem("name", "koko"); //overwrite
+console.log(localStorage.getItem("name"));
+localStorage.removeItem("name");
+localStorage.clear();
+
+sessionStorage.setItem("name", "rex");
+console.log(sessionStorage.getItem("name"));
+
+//      cookies 🍪
+document.cookie = "name=edmundo; expires=" + new Date(2024, 0, 5).toUTCString();
+document.cookie = "lastName=jgd; expires=" + new Date(2024, 0, 5).toUTCString();
+
+console.log(document.cookie);
+
+const fruits = { fruit: "peach" };
+
+localStorage.setItem("fruits", JSON.stringify(fruits));
+const getFruits = JSON.parse(localStorage.getItem("fruits"));
+console.log(getFruits);
