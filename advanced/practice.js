@@ -62,3 +62,188 @@ function store(name, obj) {
 function retrieve(name) {
   return JSON.parse(localStorage.getItem(name));
 }
+
+//************************************** */
+//           GENERATORS    /          ///
+
+// generators are created as window object methods,so it can be overwritten
+
+function* generateSequence() {
+  yield 3;
+  yield 4;
+  return 5;
+}
+let generator = generateSequence();
+let generator2 = generateSequence();
+// console.log(generator.next());
+// console.log(generator.next());
+// console.log(generator.next());
+// // new separate generator object
+console.log(generator2.next());
+console.log(generator2.next());
+console.log(generator2.next());
+
+// iterate
+
+// for (let value of generator) {
+//   alert(value);
+// }
+function* generateSequence() {
+  yield 1;
+  yield 2;
+  return 3;
+}
+
+let generator1 = generateSequence();
+
+// iterate
+// for (let value of generator1) {
+//   alert(value); // 1, then 2
+// }
+let sequence = [0, ...generateSequence()];
+console.log(sequence);
+
+function* simpleGenerator() {
+  console.log("before 1");
+  yield 1;
+  console.log("after 1");
+  console.log("before 2");
+  yield 2;
+  console.log("after 2");
+  console.log("before 3");
+  yield 3;
+  console.log("after 3");
+}
+const generatorObject = simpleGenerator();
+console.log(generatorObject.next());
+console.log(generatorObject.next());
+console.log(generatorObject.next());
+console.log(generatorObject.next());
+
+function* generateId() {
+  let id = 1;
+  while (true) {
+    const increment = yield id;
+    if (increment != null) {
+      id += increment;
+    } else {
+      id++;
+      console.log(generateId().next().value);
+    }
+  }
+}
+
+const idGenerator = generateId();
+console.log(idGenerator.next().value);
+console.log(idGenerator.next().value);
+console.log(idGenerator.next(5).value);
+console.log(generateId().next().value);
+console.log(generateId().next().value);
+
+function* iterateArr(array) {
+  yield array;
+}
+const array3 = [6, 9, 10, 567];
+const array = iterateArr([4, 8, 23, 8]);
+for (let value of array) {
+  console.log(value);
+}
+const object = iterateArr({ name: "logan", age: 76 });
+for (let value in array.entries) {
+  console.log(value);
+}
+
+console.log(object.next().value);
+
+//**************************** */
+//      RECURSION
+
+function callmeMaybe(n) {
+  if (n === 0) return;
+  console.log(`Doing ${n} `);
+  callmeMaybe(n - 1);
+}
+callmeMaybe(3);
+
+// find factorial
+// with loop
+function findFactorial(n) {
+  let factorial = 1;
+  for (let i = factorial; i <= n; i++) {
+    factorial *= i;
+  }
+  console.log(factorial);
+}
+findFactorial(5);
+
+// with recursion
+function findFactorialR(n) {
+  if (n === 0) return 1;
+  let factorial = n * findFactorialR(n - 1);
+
+  return factorial;
+}
+console.log(findFactorialR(5));
+
+// more examples
+function countDown(n) {
+  for (let i = n; i > 0; i--) {
+    console.log(i);
+  }
+  console.log("Hooray");
+}
+countDown(3);
+
+function countDownRecursive(n) {
+  if (n === 0) {
+    console.log("hooray");
+    return;
+  }
+  console.log(n);
+  countDownRecursive(n - 1);
+}
+countDownRecursive(3);
+
+function sumRangeR(n) {
+  if (n === 0) return 0;
+  let total = n + sumRangeR(n - 1);
+  return total;
+}
+console.log(sumRangeR(3));
+
+function sumRangeR2(n, total = 0) {
+  if (n <= 0) return total;
+
+  total = sumRangeR2(n - 1, total + n);
+  return total;
+}
+console.log(sumRangeR2(3));
+
+function printChildren(obj) {
+  console.log(obj.name);
+  obj.children.map((child) => printChildren(child));
+}
+
+const tree = {
+  name: "John",
+  children: [
+    {
+      name: "Jim",
+      children: [],
+    },
+    {
+      name: "Zoe",
+      children: [
+        {
+          name: "Kyle",
+          children: [],
+        },
+        {
+          name: "Sophia",
+          children: [],
+        },
+      ],
+    },
+  ],
+};
+printChildren(tree);
