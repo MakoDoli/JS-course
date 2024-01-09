@@ -155,6 +155,76 @@ for (let value in array.entries) {
 
 console.log(object.next().value);
 
+cardDeck = {
+  suits: ["⚜", "🔶", "💗", "🐧"],
+  court: ["J", "Q", "K", "A"],
+  [Symbol.iterator]: function* () {
+    for (let suit of this.suits) {
+      for (let i = 2; i <= 10; i++) yield suit + i;
+      for (let c of this.court) yield suit + c;
+    }
+  },
+};
+console.log([...cardDeck]);
+
+// adding amount with yield
+function* myBalance() {
+  let balance = 0;
+  while (true) {
+    balance += yield balance;
+  }
+}
+
+const myAcc = myBalance(0);
+console.log(myAcc.next().value);
+console.log(myAcc.next(30).value);
+console.log(myAcc.next(50).value);
+//console.log([...myAcc]);
+
+///////////////////////////
+// get almost random increasing/decreasing number (f.e.to use as color or position)
+function* neverEnding() {
+  while (true) {
+    yield Date.now();
+  }
+}
+let now = neverEnding();
+/*setInterval(() => {
+  let t = Math.sin(now.next().value / 1000) * 0.5 + 0.5;
+  console.log(t);
+}, 500);*/
+console.log((Math.sin(Date.now()) * 0.5 + 0.5).toFixed(6) * 1e6);
+
+// get yields with spread operator
+function* moreGenerators(e) {
+  yield e + 10;
+  yield e + 25;
+  yield e + 33;
+}
+let moreGenerate = moreGenerators(20);
+
+console.log([...moreGenerate]);
+
+// SPREAD OPERATOR RETURNS ARRAY OF ALL YIELDS
+
+// generator yielding generator
+
+function* mamaGenerator(x) {
+  yield x + 15;
+  yield* papaGenerator(4);
+}
+let mama = mamaGenerator(10);
+function* papaGenerator(y) {
+  yield y + y;
+  yield y * y;
+}
+
+// console.log(mama.next());
+// console.log(mama.next());
+// console.log(mama.next());
+// spread operator doesnt work if next() is already called
+console.log([...mama]);
+
 //**************************** */
 //      RECURSION
 
