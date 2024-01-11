@@ -225,6 +225,38 @@ function* papaGenerator(y) {
 // spread operator doesnt work if next() is already called
 console.log([...mama]);
 
+// GENERATORS for PAGINATION
+const dataArray = Array.from({ length: 35 }, (_, index) => index + 1);
+console.log(dataArray);
+function* paginate(data, resultsSize) {
+  let startIndex = 0;
+
+  while (startIndex < data.length) {
+    const endIndex = Math.min(startIndex + resultsSize, data.length);
+    const page = data.slice(startIndex, endIndex);
+    yield page;
+    startIndex = endIndex;
+  }
+}
+
+const pageGenerator = paginate(dataArray, 10);
+
+function displayPage(page) {
+  console.log(page);
+}
+displayPage(pageGenerator.next().value);
+
+const pageBtn = document
+  .getElementById("page")
+  .addEventListener("click", () => {
+    const nextPage = pageGenerator.next();
+    if (!nextPage.done) {
+      displayPage(nextPage.value);
+    } else {
+      console.log("Nomore results!");
+    }
+  });
+
 //**************************** */
 //      RECURSION
 
@@ -317,6 +349,15 @@ const tree = {
   ],
 };
 printChildren(tree);
+
+function chirp(n) {
+  if (n === 1) {
+    return "chirp";
+  }
+  return "chirp-" + chirp(n - 1);
+}
+
+console.log(chirp(5));
 
 // setting HTTPOny flag on cookies
 
