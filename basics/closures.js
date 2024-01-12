@@ -219,3 +219,16 @@ function buildFun(n) {
 
   return res;
 }
+
+function increment() {
+  let number = 1;
+  return function add() {
+    console.log(number);
+    number++;
+  };
+}
+const add3 = increment();
+add3();
+add3();
+add3();
+add3();
