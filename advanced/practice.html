@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style.css" />
     <title>Practice</title>
   </head>
   <body>
@@ -13,7 +14,46 @@
     </form>
     <p id="inp">paragraph</p>
     <section id="section"></section>
-    <button style="margin-top: 20px" id="page">display</button>
+    <button
+      style="margin-top: 20px"
+      id="page"
+      onclick="console.log('onlick attribute')"
+    >
+      display
+    </button>
+    <p>Js engine takes the code and performs three steps:</p>
+    <ul>
+      <li>Parsing</li>
+      <li>Compilation</li>
+      <li>Execution</li>
+    </ul>
+    <h1>PARSING</h1>
+    <p>
+      During parsing code is converted to tokens (each token for each syntax
+      piece), then syntax parser builds AST - Abstract Syntax Tree. AST is a
+      JSON object with key-values describing start, end, body, type of code as
+      well as other details
+    </p>
+
+    <h1>COMPILATION</h1>
+    <p>Interpretter</p>
+    <p>Interpretter reads code line by line. Interpretter is fast</p>
+    <p>
+      Complier reads whole code and modifies it to more optimized code. Complier
+      is efficient
+    </p>
+    <p>JS uses JIT (just in time) complilation -</p>
+    <p>
+      AST goes to Interpretter and interpreter converts high-level code to byte
+      code and compiler tries to optimize the code and then code is sent to
+      execution
+    </p>
+    <p>here comes our eloved callstack and heap memory</p>
+    <p>
+      v8 - Ignition interpretter + Turbofan complier + Orinoco garbage collector
+    </p>
+
     <script src="practice.js"></script>
+    <script src="runtime.js"></script>
   </body>
 </html>

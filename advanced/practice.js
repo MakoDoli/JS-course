@@ -246,17 +246,16 @@ function displayPage(page) {
 }
 displayPage(pageGenerator.next().value);
 
-const pageBtn = document
-  .getElementById("page")
-  .addEventListener("click", () => {
-    const nextPage = pageGenerator.next();
-    if (!nextPage.done) {
-      displayPage(nextPage.value);
-    } else {
-      console.log("Nomore results!");
-    }
-  });
-
+const pageBtn = document.getElementById("page");
+pageBtn.addEventListener("click", () => {
+  const nextPage = pageGenerator.next();
+  if (!nextPage.done) {
+    displayPage(nextPage.value);
+  } else {
+    console.log("Nomore results!");
+  }
+});
+pageBtn.click();
 //**************************** */
 //      RECURSION
 
