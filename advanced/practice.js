@@ -246,17 +246,16 @@ function displayPage(page) {
 }
 displayPage(pageGenerator.next().value);
 
-const pageBtn = document
-  .getElementById("page")
-  .addEventListener("click", () => {
-    const nextPage = pageGenerator.next();
-    if (!nextPage.done) {
-      displayPage(nextPage.value);
-    } else {
-      console.log("Nomore results!");
-    }
-  });
-
+const pageBtn = document.getElementById("page");
+pageBtn.addEventListener("click", () => {
+  const nextPage = pageGenerator.next();
+  if (!nextPage.done) {
+    displayPage(nextPage.value);
+  } else {
+    console.log("Nomore results!");
+  }
+});
+pageBtn.click();
 //**************************** */
 //      RECURSION
 
@@ -304,7 +303,7 @@ function countDownRecursive(n) {
   console.log(n);
   countDownRecursive(n - 1);
 }
-countDownRecursive(3);
+countDownRecursive(2);
 
 function sumRangeR(n) {
   if (n === 0) return 0;
@@ -373,3 +372,33 @@ app.get("/setcookie", (req, res) => {
 app.listen(3000, () => {
   console.log("server is running on port 3000");
 });*/
+
+console.log(typeof NaN); // number
+console.log(Function instanceof Object); // true
+console.log([[]] == 0); //true
+console.log([[]] == [[]]); // false
+console.log([""] == ""); // true
+console.log([""] == 0); // true
+
+//     !!!   DON"T trust parseInt()  !!
+
+const arrayR = [1, 2, [3, 4], [[5, 6, 7]]];
+
+const flatArray = (array) => {
+  // let tempArray = [];
+  console.log(array);
+  array.map((item) => {
+    Array.isArray(item) ? flatArray(item) : item;
+  });
+  return array.flat();
+};
+
+console.log(flatArray(arrayR));
+
+function replicate(times, number) {
+  let arr = [];
+  if (times <= 0) return arr;
+  arr.push(...replicate(times - 1, number), number);
+
+  return arr;
+}
