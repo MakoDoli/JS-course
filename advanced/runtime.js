@@ -55,3 +55,74 @@ const jsEngine = "v8";
     ],
     "sourceType": "module"
   } */
+
+//********************************* */
+//
+//      PROXIES
+
+const handler = {
+  get(target, key) {
+    return key in target ? target[key] : 37;
+  },
+};
+
+const p = new Proxy({}, handler);
+
+p.a = 1;
+p.b = undefined;
+console.log(p.a, p.b); // 1, undefiend
+console.log("c" in p, p.c); // false 37
+
+let validator = {
+  set(obj, prop, value) {
+    if (prop === "age") {
+      if (typeof value !== "number" || Number.isNaN(value) || value < 0) {
+        console.log("Age must be a positive number");
+        // throw new RangeError("Age must be a positive number");
+      }
+    }
+    obj[prop] = value;
+    // obj.prop = value
+  },
+};
+let person = new Proxy({}, validator);
+person.age = "young"; // "Age must be a positive number"
+person.age = -5; // Age must be a positive number
+person.age = 17;
+console.log(person.age);
+
+const user = {
+  age: 20,
+  name: "bob",
+};
+
+const prx = new Proxy(user, {
+  get(target, key) {
+    if (key === "name") {
+      return capitalize(target[key]);
+    } else {
+      return target[key];
+    }
+  },
+});
+
+function capitalize(str) {
+  let capt = str.charAt(0).toUpperCase() + str.slice(1);
+  return capt;
+}
+console.log(prx.name);
+
+const stable = {
+  pi: 3.14,
+};
+
+const noTouchy = {
+  set() {
+    console.log("NoTouchy!");
+    return true;
+  },
+};
+
+const guard = new Proxy(stable, noTouchy);
+guard.pi = 5;
+console.log(stable.pi);
