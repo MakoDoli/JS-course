@@ -73,6 +73,9 @@ p.b = undefined;
 console.log(p.a, p.b); // 1, undefiend
 console.log("c" in p, p.c); // false 37
 
+//      ****        //
+//
+
 let validator = {
   set(obj, prop, value) {
     if (prop === "age") {
@@ -90,6 +93,9 @@ person.age = "young"; // "Age must be a positive number"
 person.age = -5; // Age must be a positive number
 person.age = 17;
 console.log(person.age);
+
+//     ************
+//
 
 const user = {
   age: 20,
@@ -111,6 +117,8 @@ function capitalize(str) {
   return capt;
 }
 console.log(prx.name);
+//     *******     ///
+//
 
 const stable = {
   pi: 3.14,
@@ -124,5 +132,38 @@ const noTouchy = {
 };
 
 const guard = new Proxy(stable, noTouchy);
-guard.pi = 5;
-console.log(stable.pi);
+guard.pi = 5; // NoTouchy!
+guard.name = "pi"; // NoTouchy!
+console.log(stable.pi); // 3.14
+console.log(guard.pi); // 3.14
+console.log(guard.name); // undefined
+//   ********** //
+//
+
+const newHandler = {
+  set(target, prop, value) {
+    if (typeof value !== "string") {
+      console.log(
+        `Attempt to set ${prop} property with non-string value: ${value} `
+      );
+    } else {
+      console.log(`Setting property ${prop} to ${value}`);
+      target[prop] = value;
+    }
+  },
+  get(target, key) {
+    if (key in target) {
+      console.log(`Requested ${key} property  equals to ${target[key]}`);
+      return target[key];
+    } else {
+      console.log(`Such property doesnt exist on ${target}`);
+    }
+  },
+};
+
+const newPr = new Proxy({}, newHandler);
+
+newPr.name = "John";
+console.log(newPr.name);
+
+// If we touch target's key/property by any means, proxy will react with handler
