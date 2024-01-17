@@ -19,7 +19,7 @@ console.log(performance.memory);
 /*                                */
 //          JS ENGINE
 //
-// JS engine is not a mcahine
+// JS engine is not a machine
 // firefox -spidermonkey - evolved from very first js engine created by js creator brendan eich
 //
 //chrome -v8
@@ -167,3 +167,69 @@ newPr.name = "John";
 console.log(newPr.name);
 
 // If we touch target's key/property by any means, proxy will react with handler
+
+//
+const allowedProperties = ["name", "age", "gender"];
+
+const handler2 = {
+  set(target, prop, value) {
+    if (allowedProperties.includes(prop)) {
+      console.log(`Setting value of ${prop} to ${value}`);
+      target[prop] = value;
+    } else {
+      if (!allowedProperties.includes(prop)) {
+        console.log(`Cannot change value of ${prop}`);
+      }
+    }
+  },
+  get(target, prop) {
+    if (allowedProperties.includes(prop)) {
+      console.log(` value of ${prop} is ${target[prop]}`);
+      return target[prop];
+    } else {
+      if (!allowedProperties.includes(prop)) {
+        console.log(`Cannot access value of ${prop}`);
+        return false;
+      }
+    }
+  },
+};
+
+const guardedObj = new Proxy({}, handler2);
+//
+const target = {
+  name: "Hossein",
+  age: 26,
+};
+
+const handler5 = {
+  get(target, property) {
+    console.log(`Getting property: ${property}`);
+    return target[property];
+  },
+  set(target, property, value) {
+    if (typeof value == "number") {
+      console.log(`Setting property: ${property} = ${value}`);
+      target[property] = value;
+    } else {
+      console.log(`${property} must be a number`);
+      return false;
+    }
+  },
+};
+const proxy = new Proxy(target, handler5);
+proxy.age = 30;
+/* 1. Proxy is an object which wraps original "target' object and monitors, controls and redefines its properties or methods. We can use proxies to handle calls or access to target's properties
+2. We create proxy with new keyword and Proxy constructor, passing two arguments - target object and handler object:
+const handler ={
+get (target, prop){
+if (prop ===name){
+return target[prop]
+}else {
+console.log(`this ${prop} is not available`)
+return false
+}
+3. Traps are mainly setters or getters, which "trap" certain properties and control behavior over them.
+
+4. by defining  'get' trap, we can customize how proxy responses when property is accessed. We can return property value or restrict access to property at all
+5. 'set' traps control how properties are assigned. We can use validations or other functions before setting/asigning property */
